@@ -1,0 +1,2 @@
+/* Importing reset. Doing this so that it can be in another file (less messy) */
+@import "reset.css";
