@@ -19,7 +19,7 @@ async function fetchRandomAnimal() {
 }
 // Function to start the drawing phase
 async function startDrawing() {
-  currentWord = await fetchRandomAnimal();
+  let currentWord = await fetchRandomAnimal();
   //   wordDisplay.textContent = "Draw: " + currentWord;
   //   wordDisplay.style.display = "block"; // Show the word
   //   startButton.style.display = "none"; // Hide the start button
