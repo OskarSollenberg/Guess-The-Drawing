@@ -13,24 +13,37 @@
         <title>Guess The Drawing</title>
     </head>
     <body>
-
         <main class="main">
             <h1 class="title">Guess The Drawing</h1>
-            <div class="main-card">
-                <p class="instructions"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                    Omnis vero incidunt provident dolore et possimus alias laudantium mollitia non. 
-                    Magni ratione quas, officia consectetur velit et non aspernatur enim accusantium?
-                </p>
-                <button class="start-game">Start</button>
+            <div class="main-card" id="page1">
+                <p class="instructions" id="instructions">Instructions</p>
+                <button class="start-game" id="bt-start">Start</button>
             </div>
             <gallery class="gallery">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
+                <h2>Gallery</h2>
+                <div>
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
             </gallery>
-            
+            <div class="main-card" id="page2">
+                <p class="play2">Player 2 look away</p>
+                <button class="next-game">Next</button>
+            </div>
 
+            <div class="main-card" id="page3">
+                <p class="key-word" id="key-word">Random word</p>
+                <button class="next-game">Start Drawing</button>
+            </div>
+
+            <div class="main-card" id="page4">
+                <p class="key-word" id="key-word">Player 1, draw the img</p>
+                <canvas></canvas>
+                <p class="countDown">20</p>
+            </div>
         </main>
-        <script src="script.js"></script>
+
+        <script src="script2.js"></script>
     </body>
 </html>
