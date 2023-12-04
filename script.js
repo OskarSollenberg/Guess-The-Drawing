@@ -44,7 +44,7 @@ for (let button of pageButtons) {
     button.addEventListener("click", toggleVisability);
 }
 function toggleVisability() {
-    pages[currentPageNumber].classList.remove("card-visable");
-    pages[currentPageNumber + 1].classList.add("card-visable");
+    pages[currentPageNumber].classList.remove("card--visable");
+    pages[currentPageNumber + 1].classList.add("card--visable");
     currentPageNumber++;
 }

@@ -20,6 +20,7 @@ body {
     text-align: left;
     justify-content: center;
     background-color: white;
+    padding: 1rem;
 }
 .title {
     font-size: 3rem;
@@ -35,9 +36,10 @@ body {
     padding: 2rem;
     background-color: var(--mustardYellow);
 }
-@media (max-width: 40rem) {
+@media (max-width: 50rem) {
     .card {
         border-radius: 0rem;
+        width: 100%;
     }
 }
 .card-information {
@@ -67,11 +69,11 @@ body {
     width: 300px;
     height: 200px;
 }
-.card-visable {
+.card--visable {
     display: flex;
 }
 
 canvas {
     background: white;
-    width: 500px;
+    width: 400px;
 }
