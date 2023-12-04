@@ -32,10 +32,6 @@ async function startDrawing() {
     //   }, 2000);
 }
 
-// const page1 = document.querySelector("#page1");
-// const page2 = document.querySelector("#page2");
-// const page3 = document.querySelector("#page3");
-
 const pages = document.querySelectorAll(".card");
 const pageButtons = document.querySelectorAll(".button");
 let currentPageNumber = 0;
