@@ -17,23 +17,35 @@
     <body>
         <main class="main">
             <h1 class="title">Guess The Drawing</h1>
-            <div class="main-card" id="page1">
-                <p class="instructions" id="instructions">Instructions</p>
-                <button class="start-game" id="bt-start">Start</button>
+            <div class="card card-visable" id="page1">
+                <p class="card-information" id="instructions">
+                    Welcome to "Draw the Animal" <br />
+                    This game is about guessing what animal the other player has
+                    drawn.
+                </p>
+                <button class="button button--start-game" id="bt-start">
+                    Start
+                </button>
             </div>
 
-            <div class="main-card" id="page2">
-                <p class="play2">Player 2 look away</p>
-                <button class="next-game">Next</button>
+            <div class="card card-hidden" id="page2">
+                <p class="card-information">
+                    We will now give player 1 the Animal they should draw
+                    <br />
+                    <br />Player 2 look away
+                </p>
+                <button class="button button--next-game">Next</button>
             </div>
 
-            <div class="main-card" id="page3">
-                <p class="key-word" id="key-word">Random word</p>
-                <button class="next-game">Start Drawing</button>
+            <div class="card card-hidden" id="page3">
+                <p class="card-information" id="key-word">Random word</p>
+                <button class="button button--next-game">Start Drawing</button>
             </div>
 
-            <div class="main-card" id="page4">
-                <p class="key-word" id="key-word">Player 1, draw the img</p>
+            <div class="card card-hidden" id="page4">
+                <p class="card-information" id="key-word">
+                    Player 1, draw the img
+                </p>
                 <canvas></canvas>
                 <p class="countDown">20</p>
             </div>
@@ -42,6 +54,6 @@
             <h2>Gallery</h2>
             <div></div>
         </gallery>
-        <script src="script2.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -1,82 +1,77 @@
 /* Importing reset. Doing this so that it can be in another file (less messy) */
 @import "reset.css";
 
-:root{
-  /*Colours*/
-  --green: #397c40;
-  --blue: #060846;
-  --red: #ee0044;
-  --lightBlue: #33b0db;
-  --mustardYellow:#FAA714;
-
+:root {
+    /*Colours*/
+    --green: #397c40;
+    --blue: #060846;
+    --red: #ee0044;
+    --lightBlue: #33b0db;
+    --mustardYellow: #faa714;
 }
 
-
-body{
-  font-family: 'Delicious Handrawn', cursive;
+body {
+    font-family: "Delicious Handrawn", cursive;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    background-color: white;
+}
+.title {
+    font-size: 3rem;
+}
+.card {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40rem;
+    width: 50rem;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: var(--mustardYellow);
+}
+@media (max-width: 40rem) {
+    .card {
+        border-radius: 0rem;
+    }
+}
+.card-information {
+    font-size: 2rem;
+    text-align: justify;
+    padding-bottom: 1rem;
+    margin: 2rem;
+    text-align: center;
+}
+.button {
+    padding: 0.5rem 2rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--green);
+    color: white;
+    transition: 200ms;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.gallery img {
+    display: block;
+    background-color: var(--blue);
+    border-radius: 1rem;
+    width: 300px;
+    height: 200px;
+}
+.card-visable {
+    display: flex;
 }
 
-.main{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-  justify-content: center;
-  background-color: white;
+canvas {
+    background: white;
+    width: 500px;
 }
-
-.title{
-  font-size: 3rem;
-}
-
-.main-card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-  justify-content: center;
-  width: 80%;
-  max-width: 1024px;
-  height: 500px;
-  border-radius: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 2rem;
-  background-color: var(--mustardYellow);
-}
-
-.instructions{
-  font-size: 2rem;
-  text-align: justify;
-  padding-bottom: 1rem;
-  margin: 2rem;
-}
-
-.start-game{
-  padding: 0.5rem 2rem;
-  font-size: 2rem;
-  border-radius: 0.5rem;
-  background-color: var(--green);
-  color: white;
-  transition: 200ms;
-}
-
-.start-game:hover{
-  transform: translateY(8px);
-}
-
-.gallery{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
-}
-
-.gallery img{
-  display: block;
-  background-color: var(--blue);
-  border-radius: 1rem;
-  width: 300px;
-  height: 200px;
-}
-
-
