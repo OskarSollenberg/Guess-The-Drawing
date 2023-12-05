@@ -130,3 +130,7 @@ body {
 .submitGuessBtn {
     text-align: center;
 }
+
+.win-condition {
+    display: flex;
+}

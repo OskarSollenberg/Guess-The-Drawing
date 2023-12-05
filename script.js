@@ -14,10 +14,12 @@ async function fetchRandomAnimal() {
         return "Error fetching word";
     }
 }
+let result; // Variable to store the api result in
 // Function to display the fetched animal name
 async function displayAnimalName() {
     let animalName = await fetchRandomAnimal();
     let keyWordElement = document.querySelector("#key-word");
+    result = animalName;
     keyWordElement.textContent = animalName; // Replace "Random word" with the fetched animal name
 }
 
@@ -120,7 +122,6 @@ canvasEl.addEventListener("pointerup", function () {
     }
 });
 
-// Comparing user input/guess and word from API
 
 let userInput = document.querySelector("#userInput");
 let submitGuessBtn = document.querySelector("#submitGuessBtn");
@@ -129,12 +130,51 @@ let form = document.querySelector("#form");
 submitGuessBtn.addEventListener("click", function () {
     let userInputValue = userInput.value;
     console.log(userInputValue);
-
+    compareInputToApi()
     form.reset();
 });
 
-// function compareInputwithApi {
-//     if (userInputValue = animalName) {
-//         let win = document.querySelector
-//     }
-// }
+// winning condition
+
+function compareInputToApi() {
+    if (userInput.value.toLowerCase() === result.toLowerCase()) {
+        displayCorrect()
+        playAgainButton()
+    }
+    else {
+        displayWrong()
+        playAgainButton()
+    }
+}
+
+function displayCorrect() {
+    form.style.display = "none";
+    let col = document.querySelector(".col")
+    let win = document.createElement("div")
+    col.appendChild(win);
+    win.className = "win-condition";
+    win.innerText = "Correct!"
+}
+
+function displayWrong() {
+    form.style.display = "none";
+    let col = document.querySelector(".col")
+    let wrong = document.createElement("div")
+    col.appendChild(wrong);
+    wrong.className = "win-condition";
+    wrong.innerText = `Wrong! The correct answer is ${result}!`
+}
+
+function playAgainButton() {
+    let playAgainBtn = document.createElement("button")
+    let col = document.querySelector(".col")
+    col.appendChild(playAgainBtn);
+    playAgainBtn.className = "button";
+    playAgainBtn.innerText = "Play Again!"
+    playAgainBtn.addEventListener("click", function () {
+        location.reload();
+    })
+}
+
+
+//LOOK AT LINE 17. I had to change that as well.
