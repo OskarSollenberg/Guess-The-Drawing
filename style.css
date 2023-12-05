@@ -93,9 +93,7 @@ body {
     display: flex;
 }
 
-#canvas {
-    /* width: 800px;
-    height: 560px; */
+.canvas {
     border: 1px solid black;
     background: white;
 }
