@@ -43,14 +43,13 @@ body {
     }
 }
 .card-information {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: justify;
     padding-bottom: 1rem;
-    margin: 2rem;
     text-align: center;
 }
 .button {
-    padding: 0.5rem 2rem;
+    /* padding: 0.5rem 2rem; */
     font-size: 2rem;
     border-radius: 0.5rem;
     background-color: var(--green);
@@ -68,10 +67,9 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 2rem;
 }
 
-.gallery-photos {
+.gallery-grid {
     display: grid;
     align-items: center;
     text-align: left;
@@ -86,8 +84,8 @@ body {
 
 .gallery img {
     background-color: var(--blue);
-    width: 300px;
-    height: 200px;
+    width: 200px;
+    height: 100px;
 }
 .card--visable {
     display: flex;
@@ -96,4 +94,39 @@ body {
 .canvas {
     border: 1px solid black;
     background: white;
+}
+
+.card--content-positioning {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 70rem) {
+    .card--content-positioning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.form {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form--visable {
+    display: flex;
+}
+.submitGuessBtn {
+    text-align: center;
 }

@@ -5,44 +5,44 @@
 
 async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
-    const options = {
-        method: "GET",
-    };
-
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         const result = await response.json();
         return result?.animal;
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching animal:", error);
+        return "Error fetching word";
     }
 }
-// Function to start the drawing phase
-async function startDrawing() {
-    let currentWord = await fetchRandomAnimal();
-    //   wordDisplay.textContent = "Draw: " + currentWord;
-    //   wordDisplay.style.display = "block"; // Show the word
-    //   startButton.style.display = "none"; // Hide the start button
-
-    //   setTimeout(() => {
-    //     // Hide the word after 2 seconds
-    //     wordDisplay.style.display = "none";
-    //     canDraw = true;
-    //     startTimer(); // Start the countdown timer
-    //   }, 2000);
+// Function to display the fetched animal name
+async function displayAnimalName() {
+    let animalName = await fetchRandomAnimal();
+    let keyWordElement = document.querySelector("#key-word");
+    keyWordElement.textContent = animalName; // Replace "Random word" with the fetched animal name
 }
 
-const pages = document.querySelectorAll(".card");
-const pageButtons = document.querySelectorAll(".button");
+const cards = document.querySelectorAll(".card");
+const cardButtons = document.querySelectorAll(".button");
 let currentPageNumber = 0;
+// Function to handle the visibility of different cards/cards
 
-for (let button of pageButtons) {
-    button.addEventListener("click", toggleVisability);
-}
 function toggleVisability() {
-    pages[currentPageNumber].classList.remove("card--visable");
-    pages[currentPageNumber + 1].classList.add("card--visable");
+    let previousPageNumber = currentPageNumber;
+    cards[currentPageNumber].classList.remove("card--visable");
     currentPageNumber++;
+    cards[currentPageNumber].classList.add("card--visable");
+
+    if (currentPageNumber === 2) {
+        // Display the animal name when the third page (page number 2) is shown
+        displayAnimalName();
+    } else if (currentPageNumber === 3 && previousPageNumber === 2) {
+        // Start the canvas drawing timer only when moving from the third page (page number 2) to the fourth page (page number 3)
+        startTimer();
+    }
+}
+// Adding click event listeners to buttons to handle page visibility changes
+for (let button of cardButtons) {
+    button.addEventListener("click", toggleVisability);
 }
 
 const canvasEl = document.querySelector("#canvas");
@@ -51,7 +51,7 @@ let isDrawing = false;
 let canDraw = true;
 let lastX = 0;
 let lastY = 0;
-let seconds = 21;
+let seconds = 3;
 let rect = canvasEl.getBoundingClientRect();
 
 // canvasEl.width = rect.width * devicePixelRatio;
@@ -74,30 +74,30 @@ canvasEl.height = canvasEl.width * heightRatio;
     as a parameter a function that serves as first parameter in
     setInterval() method.
 */
-setInterval(function () {
-    if (seconds <= 0) {
-        canDraw = false;
-    } else {
-        seconds -= 1;
-        document.querySelector("#counter").textContent = seconds;
-    }
-}, 1000);
+
+function startTimer() {
+    setInterval(function () {
+        if (seconds <= 0) {
+            canDraw = false;
+            form.classList.add("form--visable");
+            cards[currentPageNumber].classList.add("card--content-positioning");
+        } else {
+            seconds -= 1;
+            document.querySelector("#counter").textContent = seconds;
+        }
+    }, 1000);
+}
+
 canvasEl.addEventListener("pointerdown", function (e) {
     isDrawing = true;
-    // const x = e.clientX - canvasEl.offsetLeft;
-    // const y = e.clientY - canvasEl.offsetTop;
-    //   const x = ((e.offsetX * canvasEl.width) / canvasEl.clientWidth) | 0;
-    //   const y = ((e.offsetY * canvasEl.height) / canvasEl.clientHeight) | 0;
     lastX = ((e.offsetX * canvasEl.width) / canvasEl.clientWidth) | 0;
     lastY = ((e.offsetY * canvasEl.height) / canvasEl.clientHeight) | 0;
     context.beginPath();
-    //   context.moveTo(x, y);
+
     context.moveTo(lastX, lastY);
 });
 canvasEl.addEventListener("pointermove", function (e) {
     if (canDraw && isDrawing) {
-        // const x = e.clientX - canvasEl.offsetLeft;
-        // const y = e.clientY - canvasEl.offsetTop;
         const x = ((e.offsetX * canvasEl.width) / canvasEl.clientWidth) | 0;
         const y = ((e.offsetY * canvasEl.height) / canvasEl.clientHeight) | 0;
         context.quadraticCurveTo(
@@ -108,7 +108,6 @@ canvasEl.addEventListener("pointermove", function (e) {
         );
         lastX = x;
         lastY = y;
-        // context.lineTo(x, y);
         context.stroke();
     }
 });
@@ -120,3 +119,22 @@ canvasEl.addEventListener("pointerup", function () {
         isDrawing = false;
     }
 });
+
+// Comparing user input/guess and word from API
+
+let userInput = document.querySelector("#userInput");
+let submitGuessBtn = document.querySelector("#submitGuessBtn");
+let form = document.querySelector("#form");
+
+submitGuessBtn.addEventListener("click", function () {
+    let userInputValue = userInput.value;
+    console.log(userInputValue);
+
+    form.reset();
+});
+
+// function compareInputwithApi {
+//     if (userInputValue = animalName) {
+//         let win = document.querySelector
+//     }
+// }
