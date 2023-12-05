@@ -28,7 +28,7 @@
                 </button>
             </div>
 
-            <div class="card card--hidden" id="page2">
+            <div class="card" id="page2">
                 <p class="card-information">
                     We will now give player 1 the Animal they should draw
                     <br />
@@ -37,23 +37,29 @@
                 <button class="button button--next-game">Next</button>
             </div>
 
-            <div class="card card--hidden" id="page3">
+            <div class="card" id="page3">
                 <p class="card-information" id="key-word">Random word</p>
                 <button class="button button--next-game">Start Drawing</button>
             </div>
 
-            <div class="card card--hidden" id="page4">
+            <div class="card" id="page4">
                 <p class="card-information" id="key-word">
                     Player 1, draw the img
                 </p>
-                <canvas></canvas>
-                <p class="countDown">20</p>
+                <canvas id="canvas" width="400" height="230"></canvas>
+                <p id="counter">20</p>
             </div>
         </main>
-        <gallery class="gallery">
-            <h2>Gallery</h2>
-            <div></div>
-        </gallery>
+        <section class="section-gallery">
+            <gallery class="gallery">
+                <h1 class="title">Gallery</h1>
+                <div class="gallery-photos">
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </gallery>
+        </section>
         <script src="script.js"></script>
     </body>
 </html>

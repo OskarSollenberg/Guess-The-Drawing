@@ -57,15 +57,35 @@ body {
     color: white;
     transition: 200ms;
 }
+.section-gallery {
+    width: 100vw;
+    background-color: var(--mustardYellow);
+}
+
 .gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.gallery-photos {
     display: grid;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    width: 100vw;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
+    max-width: 1024px;
+    min-height: 500px;
+    border-radius: 2rem;
 }
+
 .gallery img {
-    display: block;
     background-color: var(--blue);
-    border-radius: 1rem;
     width: 300px;
     height: 200px;
 }
@@ -73,7 +93,9 @@ body {
     display: flex;
 }
 
-canvas {
+#canvas {
+    /* width: 800px;
+    height: 560px; */
+    border: 1px solid black;
     background: white;
-    width: 400px;
 }
