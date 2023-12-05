@@ -13,6 +13,14 @@
 body {
     font-family: "Delicious Handrawn", cursive;
 }
+
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
 .main {
     display: flex;
     flex-direction: column;
@@ -83,9 +91,9 @@ body {
 }
 
 .gallery img {
-    background-color: var(--blue);
-    width: 200px;
-    height: 100px;
+    background: white;
+    width: 250px;
+    height: 150px;
 }
 .card--visable {
     display: flex;

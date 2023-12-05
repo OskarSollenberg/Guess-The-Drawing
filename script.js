@@ -3,6 +3,13 @@
 // const wordDisplay = document.querySelector("#word-display"); //define where the word will be displayed,add some div to the html
 // const startButton = document.querySelector(".start-game"); //define the start button
 
+document.addEventListener("DOMContentLoaded", (event) => {
+    if (localStorage.getItem("canvasImages")) {
+        canvasImages = JSON.parse(localStorage.getItem("canvasImages"));
+        displayGalleryImages(); // Display images if any are saved in localStorage
+    }
+});
+
 async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
     try {
@@ -76,16 +83,17 @@ canvasEl.height = canvasEl.width * heightRatio;
 */
 
 function startTimer() {
-    setInterval(function () {
-        if (seconds <= 0) {
-            canDraw = false;
-            form.classList.add("form--visable");
-            cards[currentPageNumber].classList.add("card--content-positioning");
-        } else {
-            seconds -= 1;
-            document.querySelector("#counter").textContent = seconds;
-        }
-    }, 1000);
+    if (seconds > 0) {
+        seconds -= 1;
+        document.querySelector("#counter").textContent = seconds;
+        setTimeout(startTimer, 1000); // Call countdown again after 1 second
+    } else {
+        canDraw = false;
+        saveCanvasImage();
+        displayGalleryImages();
+        form.classList.add("form--visable");
+        cards[currentPageNumber].classList.add("card--content-positioning");
+    }
 }
 
 canvasEl.addEventListener("pointerdown", function (e) {
@@ -138,3 +146,27 @@ submitGuessBtn.addEventListener("click", function () {
 //         let win = document.querySelector
 //     }
 // }
+
+let canvasImages = []; // Array to store the URLs of canvas images
+// Function to convert canvas content to an image URL and store it in the array
+function saveCanvasImage() {
+    var canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var canvasImageURL = canvas.toDataURL("image/png");
+        canvasImages.push(canvasImageURL); // Add the image URL to the array
+        localStorage.setItem("canvasImages", JSON.stringify(canvasImages)); // Save to localStorage
+    }
+}
+// Function to display images in the gallery
+function displayGalleryImages() {
+    var gallery = document.getElementById("gallery"); // Assuming you have a div with id 'gallery' for the gallery
+    var galleryGrid = document.querySelector(".gallery-grid"); // Assuming you have a div with id 'gallery' for the gallery
+
+    galleryGrid.innerHTML = ""; // Clear previous images
+    // Loop through the array and create image elements to add to the gallery
+    for (var i = 0; i < canvasImages.length; i++) {
+        var img = document.createElement("img");
+        img.src = canvasImages[i];
+        galleryGrid.appendChild(img);
+    }
+}

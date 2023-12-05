@@ -15,75 +15,75 @@
         <title>Guess The Drawing</title>
     </head>
     <body>
-        <main class="main">
-            <h1 class="title">Guess The Drawing</h1>
-            <div class="card card--visable" id="page1">
-                <p class="card-information" id="instructions">
-                    Welcome to "Draw the Animal" <br />
-                    This game is about guessing what animal the other player has
-                    drawn.
-                </p>
-                <button class="button button--start-game" id="bt-start">
-                    Start
-                </button>
-            </div>
-
-            <div class="card" id="page2">
-                <p class="card-information">
-                    We will now give player 1 the Animal they should draw
-                    <br />
-                    <br />Player 2 look away
-                </p>
-                <button class="button button--next-game">Next</button>
-            </div>
-
-            <div class="card" id="page3">
-                <p class="card-information" id="key-word"></p>
-                <button class="button button--next-game">Start Drawing</button>
-            </div>
-
-            <div class="card" id="page4">
-                <div class="col">
-                    <p class="card-information">Player 1, draw the img</p>
-                    <canvas
-                        class="canvas"
-                        id="canvas"
-                        width="400"
-                        height="230"
-                    ></canvas>
-                    <p id="counter">20</p>
+        <div class="site-wrapper">
+            <main class="main">
+                <h1 class="title">Guess The Drawing</h1>
+                <div class="card card--visable" id="page1">
+                    <p class="card-information" id="instructions">
+                        Welcome to "Draw the Animal" <br />
+                        This game is about guessing what animal the other player
+                        has drawn.
+                    </p>
+                    <button class="button button--start-game" id="bt-start">
+                        Start
+                    </button>
                 </div>
-                <div class="col">
-                    <form class="form" id="form" onsubmit="return false">
-                        <p class="card-information">
-                            Player 2, guess the animal
-                        </p>
-                        <input
-                            class="userInput"
-                            type="text"
-                            id="userInput"
-                            name="lname"
-                        />
-                        <input
-                            class="button submitGuessBtn"
-                            id="submitGuessBtn"
-                            type="submit"
-                            value="Submit"
-                        />
-                    </form>
+
+                <div class="card" id="page2">
+                    <p class="card-information">
+                        We will now give player 1 the Animal they should draw
+                        <br />
+                        <br />Player 2 look away
+                    </p>
+                    <button class="button button--next-game">Next</button>
                 </div>
-            </div>
-        </main>
-        <section class="section-gallery">
-            <gallery class="gallery">
-                <h1 class="title">Gallery</h1>
-                <div class="gallery-grid">
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                    <img src="" alt="" />
+
+                <div class="card" id="page3">
+                    <p class="card-information" id="key-word"></p>
+                    <button class="button button--next-game">
+                        Start Drawing
+                    </button>
                 </div>
-            </gallery>
-        </section>
+
+                <div class="card" id="page4">
+                    <div class="col">
+                        <p class="card-information">Player 1, draw the img</p>
+                        <canvas
+                            class="canvas"
+                            id="canvas"
+                            width="400"
+                            height="230"
+                        ></canvas>
+                        <p id="counter">20</p>
+                    </div>
+                    <div class="col">
+                        <form class="form" id="form" onsubmit="return false">
+                            <p class="card-information">
+                                Player 2, guess the animal
+                            </p>
+                            <input
+                                class="userInput"
+                                type="text"
+                                id="userInput"
+                                name="lname"
+                            />
+                            <input
+                                class="button submitGuessBtn"
+                                id="submitGuessBtn"
+                                type="submit"
+                                value="Submit"
+                            />
+                        </form>
+                    </div>
+                </div>
+            </main>
+            <section class="section-gallery">
+                <gallery class="gallery" id="gallery">
+                    <h1 class="title">Gallery</h1>
+                    <div class="gallery-grid"></div>
+                </gallery>
+            </section>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
