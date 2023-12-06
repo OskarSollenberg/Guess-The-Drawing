@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="card" id="page4">
-                    <div class="col">
+                    <div class="grid__row">
                         <p class="card-information">Player 1, draw the img</p>
                         <canvas
                             class="canvas"
@@ -56,7 +56,7 @@
                         ></canvas>
                         <p id="counter">20</p>
                     </div>
-                    <div class="col">
+                    <div class="grid__row">
                         <form class="form" id="form" onsubmit="return false">
                             <p class="card-information">
                                 Player 2, guess the animal
@@ -73,6 +73,19 @@
                                 type="submit"
                                 value="Submit"
                             />
+                            <!-- Quick example of the conditions -->
+                            <!-- <div
+                                class="winning-condition winning-condition--visable"
+                            >
+                                <p></p>
+                                <button></button>
+                            </div>
+                            <div
+                                class="loosing-condition loosing-condition--visable"
+                            >
+                                <p></p>
+                                <button></button>
+                            </div> -->
                         </form>
                     </div>
                 </div>
@@ -85,5 +98,6 @@
             </section>
         </div>
         <script src="script.js"></script>
+        <script src="canvas.js"></script>
     </body>
 </html>

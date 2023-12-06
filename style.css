@@ -120,7 +120,7 @@ body {
     }
 }
 
-.col {
+.grid__row {
     display: flex;
     flex-direction: column;
     justify-content: center;
