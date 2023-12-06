@@ -77,7 +77,7 @@ body {
     text-align: center;
 }
 
-.gallery-grid {
+.gallery-wrapper {
     display: grid;
     align-items: center;
     text-align: left;

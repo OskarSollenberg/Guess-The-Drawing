@@ -1,111 +1,108 @@
 "use strict";
 
-// Global Result / Animal Name
+const cards = document.querySelectorAll(".card"); // All cards/pages saved in an array
+const form = document.querySelector("#form"); // The form that displays where the user can input guess
+const nextPageButtons = document.querySelectorAll(".button"); // All buttons that take you to the next card/page
+const submitGuessBtn = document.querySelector("#submitGuessBtn"); // The button to submit guess
+const canvasEl = document.querySelector("#canvas"); // Canvas element
+const context = canvasEl.getContext("2d"); // The content within the canvas
+const rect = canvasEl.getBoundingClientRect(); // Size of the Canvas
+const userInput = document.querySelector("#userInput"); // To store the user guess/input into a variable
 
-// Cards / Forms
-const cards = document.querySelectorAll(".card");
-const form = document.querySelector("#form");
-// Buttons
-const buttons = document.querySelectorAll(".button");
-const submitGuessBtn = document.querySelector("#submitGuessBtn");
-// Canvas
-const canvasEl = document.querySelector("#canvas");
-const context = canvasEl.getContext("2d");
-const rect = canvasEl.getBoundingClientRect();
-// User-input
-const userInput = document.querySelector("#userInput");
+let randomAnimal; // Varible to store the API's random animal
+let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
+let currentPageNumber = 0; // What card/page the user is currently on
+let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
+let imgUrls = []; // Array containing all the image-URL's saved to local storage
 
-let result;
-let secondsToDraw = 3;
-let currentPageNumber = 0;
-let nextPageNumber = currentPageNumber + 1;
-let canvasImgUrlList = []; // Array to store the URLs of canvas images
-
+// This function fetches a random animal name from the API
 async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
     try {
         const response = await fetch(url);
         const result = await response.json();
-        return result.animal;
+        randomAnimal = result.animal;
+        return randomAnimal;
     } catch (error) {
         console.error("Error fetching animal:", error);
         return "Error fetching word";
     }
 }
-// Function to display the fetched animal name
+
+// This function waits for the API to fetch a random animal and then when function is called, displays the animal in text in the HTML.
 async function displayAnimalName() {
+    let animalWordEl = document.querySelector("#key-word");
     let animalName = await fetchRandomAnimal();
-    result = animalName;
-    let keyWordElement = document.querySelector("#key-word");
-    keyWordElement.textContent = animalName; // Replace "Random word" with the fetched animal name
+    animalWordEl.textContent = animalName;
 }
 
-// Function to handle the visibility of different cards/cards
-function toggleVisability() {
-    let previousPageNumber = currentPageNumber;
+// This function checks if the user have any time left to draw and eccecutes accordingly
+function checkTimeLeftToDraw() {
+    if (secondsLeftToDraw === 0) {
+        canDraw = false; // User can not draw anymore
+        saveCanvasToLocalStorage();
+        displayGalleryImages();
+        form.classList.add("form--visable"); // Show form where user can input guess
+        cards[currentPageNumber].classList.add("card--content-positioning"); // Push canvas to the side to make place for form (grid on class in css)
+    } else {
+        setTimeout(countDownSeconds, 1000); // Keep counting down by calling the function again after 1 second
+    }
+}
+
+// This function counts down the time the user have to draw the animal on the canvas and updates a counter displayed in HTML
+function countDownSeconds() {
+    const counter = document.querySelector("#counter");
+    secondsLeftToDraw -= 1;
+    counter.textContent = secondsLeftToDraw;
+    checkTimeLeftToDraw();
+}
+
+// This function check for the current card/page-number and calls for functions if anything should be displayed on a specific card/page
+function updateContentBasedOnPageNumber() {
+    if (currentPageNumber === 2) {
+        displayAnimalName();
+    } else if (currentPageNumber === 3) {
+        countDownSeconds();
+    }
+}
+
+// This function displays the next card/page and increments the current page number
+function displayNextPage() {
     cards[currentPageNumber].classList.remove("card--visable");
     cards[nextPageNumber].classList.add("card--visable");
     currentPageNumber++;
     nextPageNumber++;
-
-    if (currentPageNumber === 2) {
-        // Display the animal name when the third page (page number 2) is shown
-        displayAnimalName();
-    } else if (currentPageNumber === 3 && previousPageNumber === 2) {
-        // Start the canvas drawing timer only when moving from the third page (page number 2) to the fourth page (page number 3)
-        startTimer();
-    }
+    updateContentBasedOnPageNumber();
 }
 
-// Adding click event listeners to buttons to handle page visibility changes
-function startTimer() {
-    if (secondsToDraw > 0) {
-        const counter = document.querySelector("#counter");
-        secondsToDraw -= 1;
-        counter.textContent = secondsToDraw;
-        setTimeout(startTimer, 1000); // Call countdown again after 1 second
-    } else {
-        canDraw = false;
-        saveCanvasImage();
-        displayGalleryImages();
-        form.classList.add("form--visable");
-        cards[currentPageNumber].classList.add("card--content-positioning");
-    }
+//This function saves the canvas-URL to an array called "imgUrls" in the local storage
+function saveCanvasToLocalStorage() {
+    let currentDrawingUrl = canvasEl.toDataURL("image/png");
+    imgUrls.push(currentDrawingUrl);
+    localStorage.setItem("imgUrls", JSON.stringify(imgUrls));
 }
 
-// Function to convert canvas content to an image URL and store it in the array
-function saveCanvasImage() {
-    if (canvasEl.getContext) {
-        var canvasImageURL = canvasEl.toDataURL("image/png");
-        canvasImgUrlList.push(canvasImageURL); // Add the image URL to the array
-        localStorage.setItem(
-            "canvasImgUrlList",
-            JSON.stringify(canvasImgUrlList)
-        ); // Save to localStorage
-    }
-}
-// Function to display images in the gallery
+// This function removes all the images in the image-gallery and then creates new image-elements for every image-Url we have stored in local storage.
 function displayGalleryImages() {
-    const galleryGrid = document.querySelector(".gallery-grid"); // Assuming you have a div with id 'gallery' for the gallery
+    const galleryWrapper = document.querySelector(".gallery-wrapper");
+    galleryWrapper.innerHTML = "";
 
-    galleryGrid.innerHTML = ""; // Clear previous images
-    // Loop through the array and create image elements to add to the gallery
-    for (var i = 0; i < canvasImgUrlList.length; i++) {
-        var img = document.createElement("img");
-        img.src = canvasImgUrlList[i];
-        galleryGrid.appendChild(img);
-    }
-}
-function updatePreviousImagesToGallery() {
-    if (localStorage.getItem("canvasImgUrlList")) {
-        canvasImgUrlList = JSON.parse(localStorage.getItem("canvasImgUrlList"));
-        displayGalleryImages(); // Display images if any are saved in localStorage
+    for (let imgUrl of imgUrls) {
+        let img = document.createElement("img");
+        img.src = imgUrl;
+        galleryWrapper.appendChild(img);
     }
 }
 
-// winning condition
-function compareInputToApi() {
-    if (userInput.value.toLowerCase() === result.toLowerCase()) {
+// This function checkes if there are any previously drawn images that should be displayed in the image-gallery
+function checkForPrevSavedCanvasImages() {
+    if (localStorage.getItem("imgUrls")) {
+        imgUrls = JSON.parse(localStorage.getItem("imgUrls"));
+    }
+}
+// This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
+function checkIfCorrectGuess() {
+    if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
         displayWinningCondition();
         playAgainButton();
     } else {
@@ -113,7 +110,6 @@ function compareInputToApi() {
         playAgainButton();
     }
 }
-
 // Oskar thinks this should be done in HTML see quick examlpe in HTML file
 let gridRow = document.querySelector(".grid__row");
 let winningConditionMessage = document.createElement("div");
@@ -129,7 +125,7 @@ function displayLoosingCondition() {
     form.style.display = "none";
     gridRow.appendChild(loosingConditionMessage);
     loosingConditionMessage.className = "win-condition";
-    loosingConditionMessage.innerText = `Wrong! The correct answer is ${result}!`;
+    loosingConditionMessage.innerText = `Wrong! The correct answer is ${randomAnimal}!`;
 }
 function playAgainButton() {
     let playAgainBtn = document.createElement("button");
@@ -142,12 +138,13 @@ function playAgainButton() {
 }
 
 submitGuessBtn.addEventListener("click", function () {
-    compareInputToApi();
+    checkIfCorrectGuess();
     form.reset();
 });
 
-for (let button of buttons) {
-    button.addEventListener("click", toggleVisability);
+for (let nextPageButton of nextPageButtons) {
+    nextPageButton.addEventListener("click", displayNextPage);
 }
 
-updatePreviousImagesToGallery();
+checkForPrevSavedCanvasImages();
+displayGalleryImages();
