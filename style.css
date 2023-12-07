@@ -44,10 +44,11 @@ body {
     padding: 2rem;
     background-color: var(--mustardYellow);
 }
-@media (max-width: 50rem) {
+@media (max-width: 60rem) {
     .card {
         border-radius: 0rem;
-        width: 100%;
+        max-width: 50rem;
+        width: 90vw;
     }
 }
 .card-information {
@@ -112,7 +113,7 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-@media (max-width: 70rem) {
+@media (max-width: 60rem) {
     .card--content-positioning {
         display: flex;
         justify-content: center;
