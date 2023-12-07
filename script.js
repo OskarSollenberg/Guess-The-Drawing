@@ -1,49 +1,41 @@
-"use strict";
+import { fetchRandomAnimal } from "./api.js";
+import * as canvas from "./canvas.js";
 
+// Cards / Forms / Inputs
 const cards = document.querySelectorAll(".card"); // All cards/pages saved in an array
 const form = document.querySelector("#form"); // The form that displays where the user can input guess
+const formGridRow = document.querySelector(".form__grid__row");
+const userInput = document.querySelector("#userInput"); // To store the user guess/input into a variable
+
+// Buttons
 const nextPageButtons = document.querySelectorAll(".button"); // All buttons that take you to the next card/page
 const submitGuessBtn = document.querySelector("#submitGuessBtn"); // The button to submit guess
-const canvasEl = document.querySelector("#canvas"); // Canvas element
-const context = canvasEl.getContext("2d"); // The content within the canvas
-const rect = canvasEl.getBoundingClientRect(); // Size of the Canvas
-const userInput = document.querySelector("#userInput"); // To store the user guess/input into a variable
-const formGridRow = document.querySelector(".form__grid__row");
+const playAgainBtn = document.querySelector(".play-again__btn");
+
+// Winning / Loosing conditions
+const conditionsWrapperEl = document.querySelector(".conditions__wrapper");
+const conditionTitleEl = document.querySelector(".condition__title");
+const conditionMessageEl = document.querySelector(".condition__message");
+
 let randomAnimal; // Varible to store the API's random animal
 let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
 let currentPageNumber = 0; // What card/page the user is currently on
 let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
 let imgUrls = []; // Array containing all the image-URL's saved to local storage
-
 let winningCondition;
 let loosingCondition;
-
-
-// This function fetches a random animal name from the API
-async function fetchRandomAnimal() {
-    const url = "https://animal-name-api.onrender.com/random-animal";
-    try {
-        const response = await fetch(url);
-        const result = await response.json();
-        randomAnimal = result.animal;
-        return randomAnimal;
-    } catch (error) {
-        console.error("Error fetching animal:", error);
-        return "Error fetching word";
-    }
-}
 
 // This function waits for the API to fetch a random animal and then when function is called, displays the animal in text in the HTML.
 async function displayAnimalName() {
     let animalWordEl = document.querySelector("#key-word");
-    let animalName = await fetchRandomAnimal();
-    animalWordEl.textContent = animalName;
+    randomAnimal = await fetchRandomAnimal();
+    animalWordEl.textContent = randomAnimal;
 }
 
 // This function checks if the user have any time left to draw and eccecutes accordingly
 function checkTimeLeftToDraw() {
     if (secondsLeftToDraw === 0) {
-        canDraw = false; // User can not draw anymore
+        canvas.disableDrawing();
         saveCanvasToLocalStorage();
         displayGalleryImages();
         form.classList.add("form--visable"); // Show form where user can input guess
@@ -66,6 +58,7 @@ function updateContentBasedOnPageNumber() {
     if (currentPageNumber === 2) {
         displayAnimalName();
     } else if (currentPageNumber === 3) {
+        canvas.initCanvas();
         countDownSeconds();
     }
 }
@@ -81,7 +74,7 @@ function changePage() {
 
 //This function saves the canvas-URL to an array called "imgUrls" in the local storage
 function saveCanvasToLocalStorage() {
-    let currentCanvasUrl = canvasEl.toDataURL("image/png");
+    let currentCanvasUrl = canvas.getImageUrl();
     imgUrls.push(currentCanvasUrl);
     localStorage.setItem("imgUrls", JSON.stringify(imgUrls));
 }
@@ -93,6 +86,7 @@ function displayGalleryImages() {
 
     for (let imgUrl of imgUrls) {
         let img = document.createElement("img");
+
         img.src = imgUrl;
         galleryWrapper.appendChild(img);
     }
@@ -104,64 +98,36 @@ function checkForPrevSavedCanvasImages() {
         imgUrls = JSON.parse(localStorage.getItem("imgUrls"));
     }
 }
-let condition = document.querySelector(".condition")
-let conditionTitle = document.querySelector(".condition__title");
-let conditionMessage = document.querySelector(".condition__message")
-let conditionButton = document.querySelector(".play-again__btn")
+// This is the winning condition
+function showWinningCondition() {
+    conditionTitleEl.innerText = "Correct!";
+    conditionMessageEl.innerText = "You are the best!";
+}
+// This is the loosing condition
+function showLoosingCondition() {
+    conditionTitleEl.innerText = "Wrong!";
+    conditionMessageEl.innerText = `The correct answer is ${randomAnimal}!`;
+}
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
 function checkIfCorrectGuess() {
-    form.classList.remove("form--visable");
-    condition.classList.add("condition--visable")
-    console.log(userInput.value.toLowerCase() + "," + randomAnimal.toLowerCase())
-    conditionButton.addEventListener("click", function () {
-        location.reload();
-    })
     if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
-        conditionTitle.innerText = "Correct!"
-        conditionMessage.innerText = "You are the best!"
+        showWinningCondition();
     } else {
-        conditionTitle.innerText = "Wrong!";
-        conditionMessage.innerText = `The correct answer is ${randomAnimal}!`
+        showLoosingCondition();
     }
-    form.reset();
-}
-// Oskar thinks this should be done in HTML see quick examlpe in HTML file
-
-//let winningConditionMessage = document.createElement("div");
-//let loosingConditionMessage = document.createElement("div");
-
-
-
-
-
-/* function displayWinningCondition() {
-    // /winningCondition.classList.add("condition--visable");
-    gridRow.appendChild(winningConditionMessage);
-    winningConditionMessage.className = "win-condition";
-    winningConditionMessage.innerText = "Correct!";
-}
-function displayLoosingCondition() {
-    loosingCondition.classList.add("condition--visable");
-    gridRow.appendChild(loosingConditionMessage);
-    loosingConditionMessage.className = "win-condition";
-    loosingConditionMessage.innerText = `Wrong! The correct answer is ${randomAnimal}!`;
-}
-function playAgainButton() {
-    let playAgainBtn = document.createElement("button");
-    gridRow.appendChild(playAgainBtn);
-    playAgainBtn.className = "button";
-    playAgainBtn.innerText = "Play Again!";
-    playAgainBtn.addEventListener("click", function () {
-        location.reload();
-    });
 }
 
+// Play again button that reloads the page
+playAgainBtn.addEventListener("click", function () {
+    location.reload();
+});
 
-*/
-
-
+// Submit button for user to submit their guess
 submitGuessBtn.addEventListener("click", function () {
+    form.classList.remove("form--visable");
+    conditionsWrapperEl.classList.add("condition--visable");
     checkIfCorrectGuess();
+    form.reset(); // Do we need this??
 });
 
 for (let nextPageButton of nextPageButtons) {
