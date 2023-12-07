@@ -120,7 +120,7 @@ body {
     }
 }
 
-.grid__row {
+.form__grid__row {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,7 +128,7 @@ body {
     flex: 1;
 }
 .form {
-    display: none;
+    display: none; 
     flex-direction: column;
     gap: 1rem;
 }
@@ -139,10 +139,14 @@ body {
     text-align: center;
 }
 
-/* .winnningCindition {
+.condition {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
 .condition--visable {
-    display: block;
-} */
+    display: flex;
+    
+}
