@@ -8,12 +8,16 @@ const canvasEl = document.querySelector("#canvas"); // Canvas element
 const context = canvasEl.getContext("2d"); // The content within the canvas
 const rect = canvasEl.getBoundingClientRect(); // Size of the Canvas
 const userInput = document.querySelector("#userInput"); // To store the user guess/input into a variable
-
+const formGridRow = document.querySelector(".form__grid__row");
 let randomAnimal; // Varible to store the API's random animal
 let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
 let currentPageNumber = 0; // What card/page the user is currently on
 let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
 let imgUrls = []; // Array containing all the image-URL's saved to local storage
+
+let winningCondition;
+let loosingCondition;
+
 
 // This function fetches a random animal name from the API
 async function fetchRandomAnimal() {
@@ -100,31 +104,44 @@ function checkForPrevSavedCanvasImages() {
         imgUrls = JSON.parse(localStorage.getItem("imgUrls"));
     }
 }
+let condition = document.querySelector(".condition")
+let conditionTitle = document.querySelector(".condition__title");
+let conditionMessage = document.querySelector(".condition__message")
+let conditionButton = document.querySelector(".play-again__btn")
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
 function checkIfCorrectGuess() {
+    form.classList.remove("form--visable");
+    condition.classList.add("condition--visable")
+    console.log(userInput.value.toLowerCase() + "," + randomAnimal.toLowerCase())
+    conditionButton.addEventListener("click", function () {
+        location.reload();
+    })
     if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
-        displayWinningCondition();
-        playAgainButton();
+        conditionTitle.innerText = "Correct!"
+        conditionMessage.innerText = "You are the best!"
     } else {
-        displayLoosingCondition();
-        playAgainButton();
+        conditionTitle.innerText = "Wrong!";
+        conditionMessage.innerText = `The correct answer is ${randomAnimal}!`
     }
+    form.reset();
 }
 // Oskar thinks this should be done in HTML see quick examlpe in HTML file
-let gridRow = document.querySelector(".grid__row");
-let winningConditionMessage = document.createElement("div");
-let loosingConditionMessage = document.createElement("div");
 
-function displayWinningCondition() {
-    // winingCondition.classList.add("condition--visable");
-    form.style.display = "none";
+//let winningConditionMessage = document.createElement("div");
+//let loosingConditionMessage = document.createElement("div");
+
+
+
+
+
+/* function displayWinningCondition() {
+    // /winningCondition.classList.add("condition--visable");
     gridRow.appendChild(winningConditionMessage);
     winningConditionMessage.className = "win-condition";
     winningConditionMessage.innerText = "Correct!";
 }
 function displayLoosingCondition() {
-    // LoosingCondition.classList.add("condition--visable");
-    form.style.display = "none";
+    loosingCondition.classList.add("condition--visable");
     gridRow.appendChild(loosingConditionMessage);
     loosingConditionMessage.className = "win-condition";
     loosingConditionMessage.innerText = `Wrong! The correct answer is ${randomAnimal}!`;
@@ -139,9 +156,12 @@ function playAgainButton() {
     });
 }
 
+
+*/
+
+
 submitGuessBtn.addEventListener("click", function () {
     checkIfCorrectGuess();
-    form.reset();
 });
 
 for (let nextPageButton of nextPageButtons) {
