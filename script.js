@@ -25,38 +25,53 @@ let imgUrls = []; // Array containing all the image-URL's saved to local storage
 let winningCondition;
 let loosingCondition;
 
-// This function waits for the API to fetch a random animal and then when function is called, displays the animal in text in the HTML.
-async function displayAnimalName() {
+function removeLoader() {
+    let loader = document.querySelector(".loader");
+    loader.classList.remove("loader--visable");
+}
+function displayAnimal() {
     let animalWordEl = document.querySelector("#key-word");
-    randomAnimal = await fetchRandomAnimal();
     animalWordEl.textContent = randomAnimal;
 }
-
+// This function waits for the API to fetch a random animal and then when function is called, displays the animal in text in the HTML.
+async function loadAnimal() {
+    randomAnimal = await fetchRandomAnimal();
+    displayAnimal();
+    removeLoader();
+}
+function showForm() {
+    form.classList.add("form--visable"); // Show form where user can input guess
+}
+function positionCardElements() {
+    cards[currentPageNumber].classList.add("card--content-positioning"); // Push canvas to the side to make place for form (grid on class in css)
+}
 // This function checks if the user have any time left to draw and eccecutes accordingly
 function checkTimeLeftToDraw() {
     if (secondsLeftToDraw === 0) {
         canvas.disableDrawing();
         saveCanvasToLocalStorage();
         displayGalleryImages();
-        form.classList.add("form--visable"); // Show form where user can input guess
-        cards[currentPageNumber].classList.add("card--content-positioning"); // Push canvas to the side to make place for form (grid on class in css)
+        showForm();
+        positionCardElements();
     } else {
         setTimeout(countDownSeconds, 1000); // Keep counting down by calling the function again after 1 second
     }
 }
-
+function displaySecondsLeftToDraw() {
+    const counter = document.querySelector("#counter");
+    counter.textContent = secondsLeftToDraw;
+}
 // This function counts down the time the user have to draw the animal on the canvas and updates a counter displayed in HTML
 function countDownSeconds() {
-    const counter = document.querySelector("#counter");
     secondsLeftToDraw -= 1;
-    counter.textContent = secondsLeftToDraw;
     checkTimeLeftToDraw();
+    displaySecondsLeftToDraw();
 }
 
 // This function check for the current card/page-number and calls for functions if anything should be displayed on a specific card/page
 function updateContentBasedOnPageNumber() {
     if (currentPageNumber === 2) {
-        displayAnimalName();
+        loadAnimal();
     } else if (currentPageNumber === 3) {
         canvas.initCanvas();
         countDownSeconds();
