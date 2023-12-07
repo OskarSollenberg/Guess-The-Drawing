@@ -109,11 +109,22 @@ function showLoosingCondition() {
     conditionMessageEl.innerText = `The correct answer is ${randomAnimal}!`;
 }
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
+let cardInfo
 function checkIfCorrectGuess() {
-    if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
-        showWinningCondition();
-    } else {
-        showLoosingCondition();
+    if (userInput.value === "") {
+        cardInfo = document.querySelector("#_input");
+        cardInfo.innerText = "Please fill in the field"
+    }
+    else {
+        form.classList.remove("form--visable");
+        conditionsWrapperEl.classList.add("condition--visable");
+        if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
+            showWinningCondition();
+        }
+        else {
+            showLoosingCondition();
+        }
+        form.reset();
     }
 }
 
@@ -124,10 +135,8 @@ playAgainBtn.addEventListener("click", function () {
 
 // Submit button for user to submit their guess
 submitGuessBtn.addEventListener("click", function () {
-    form.classList.remove("form--visable");
-    conditionsWrapperEl.classList.add("condition--visable");
     checkIfCorrectGuess();
-    form.reset(); // Do we need this??
+
 });
 
 for (let nextPageButton of nextPageButtons) {
