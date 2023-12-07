@@ -20,7 +20,7 @@ async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
     try {
         const response = await fetch(url);
-        const result = await response.json();
+        const result = await response.json(); 
         randomAnimal = result.animal;
         return randomAnimal;
     } catch (error) {
@@ -67,7 +67,7 @@ function updateContentBasedOnPageNumber() {
 }
 
 // This function displays the next card/page and increments the current page number
-function displayNextPage() {
+function changePage() {
     cards[currentPageNumber].classList.remove("card--visable");
     cards[nextPageNumber].classList.add("card--visable");
     currentPageNumber++;
@@ -77,8 +77,8 @@ function displayNextPage() {
 
 //This function saves the canvas-URL to an array called "imgUrls" in the local storage
 function saveCanvasToLocalStorage() {
-    let currentDrawingUrl = canvasEl.toDataURL("image/png");
-    imgUrls.push(currentDrawingUrl);
+    let currentCanvasUrl = canvasEl.toDataURL("image/png");
+    imgUrls.push(currentCanvasUrl);
     localStorage.setItem("imgUrls", JSON.stringify(imgUrls));
 }
 
@@ -143,7 +143,7 @@ submitGuessBtn.addEventListener("click", function () {
 });
 
 for (let nextPageButton of nextPageButtons) {
-    nextPageButton.addEventListener("click", displayNextPage);
+    nextPageButton.addEventListener("click", changePage);
 }
 
 checkForPrevSavedCanvasImages();

@@ -12,13 +12,11 @@ function fixCanvasScaling() {
     let heightRatio = 0.7;
     canvasEl.height = canvasEl.width * heightRatio;
 }
-
 canvasEl.addEventListener("pointerdown", function (e) {
     isDrawing = true;
     lastXPos = ((e.offsetX * canvasEl.width) / canvasEl.clientWidth) | 0;
     lastYPos = ((e.offsetY * canvasEl.height) / canvasEl.clientHeight) | 0;
     context.beginPath();
-
     context.moveTo(lastXPos, lastYPos);
 });
 canvasEl.addEventListener("pointermove", function (e) {
