@@ -20,7 +20,7 @@ async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
     try {
         const response = await fetch(url);
-        const result = await response.json(); 
+        const result = await response.json();
         randomAnimal = result.animal;
         return randomAnimal;
     } catch (error) {
@@ -116,12 +116,14 @@ let winningConditionMessage = document.createElement("div");
 let loosingConditionMessage = document.createElement("div");
 
 function displayWinningCondition() {
+    // winingCondition.classList.add("condition--visable");
     form.style.display = "none";
     gridRow.appendChild(winningConditionMessage);
     winningConditionMessage.className = "win-condition";
     winningConditionMessage.innerText = "Correct!";
 }
 function displayLoosingCondition() {
+    // LoosingCondition.classList.add("condition--visable");
     form.style.display = "none";
     gridRow.appendChild(loosingConditionMessage);
     loosingConditionMessage.className = "win-condition";
