@@ -159,3 +159,10 @@ body {
 .loader--visable {
     display: block;
 }
+
+.gallery-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -21,9 +21,11 @@ let randomAnimal; // Varible to store the API's random animal
 let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
 let currentPageNumber = 0; // What card/page the user is currently on
 let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
+
 let imgUrls = []; // Array containing all the image-URL's saved to local storage
-let winningCondition;
-let loosingCondition;
+
+// let winningCondition;
+// let loosingCondition;
 
 function removeLoader() {
     let loader = document.querySelector(".loader");
@@ -50,7 +52,6 @@ function checkTimeLeftToDraw() {
     if (secondsLeftToDraw === 0) {
         canvas.disableDrawing();
         saveCanvasToLocalStorage();
-        displayGalleryImages();
         showForm();
         positionCardElements();
     } else {
@@ -89,21 +90,39 @@ function changePage() {
 
 //This function saves the canvas-URL to an array called "imgUrls" in the local storage
 function saveCanvasToLocalStorage() {
+    let object = {
+        url: "",
+        animal: "",
+    };
     let currentCanvasUrl = canvas.getImageUrl();
-    imgUrls.push(currentCanvasUrl);
+
+    object.url = currentCanvasUrl;
+    object.animal = randomAnimal;
+    imgUrls.push(object);
+
+    // imgUrls.push(currentCanvasUrl);
+
     localStorage.setItem("imgUrls", JSON.stringify(imgUrls));
 }
 
 // This function removes all the images in the image-gallery and then creates new image-elements for every image-Url we have stored in local storage.
 function displayGalleryImages() {
     const galleryWrapper = document.querySelector(".gallery-wrapper");
+
     galleryWrapper.innerHTML = "";
 
     for (let imgUrl of imgUrls) {
         let img = document.createElement("img");
+        let text = document.createElement("p");
+        let galleryContentWrapper = document.createElement("div");
+        galleryContentWrapper.classList.add("gallery-content-wrapper");
 
-        img.src = imgUrl;
-        galleryWrapper.appendChild(img);
+        img.src = imgUrl.url;
+        text.textContent = imgUrl.animal;
+        galleryWrapper.appendChild(galleryContentWrapper);
+
+        galleryContentWrapper.appendChild(img);
+        galleryContentWrapper.appendChild(text);
     }
 }
 
@@ -130,6 +149,7 @@ function checkIfCorrectGuess() {
     } else {
         showLoosingCondition();
     }
+    displayGalleryImages();
 }
 
 // Play again button that reloads the page
