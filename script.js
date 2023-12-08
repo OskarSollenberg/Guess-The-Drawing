@@ -17,6 +17,9 @@ const conditionsWrapperEl = document.querySelector(".condition__wrapper");
 const conditionStatusEl = document.querySelector(".condition__status");
 const conditionMessageEl = document.querySelector(".condition__message");
 
+// lettter in the Alphabet
+const lettersInAlphabet = /^[a-z]+$/;
+
 let randomAnimal; // Varible to store the API's random animal
 let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
 let currentPageNumber = 0; // What card/page the user is currently on
@@ -154,9 +157,14 @@ playAgainBtn.addEventListener("click", function () {
 
 // Submit button for user to submit their guess
 submitGuessBtn.addEventListener("click", function () {
-    inputContentWrapper.classList.remove("input__content-wrapper--visible");
-    conditionsWrapperEl.classList.add("condition--visible");
-    compareGuessToAnswer();
+    let userGuess = userInput.value.toLowerCase();
+    if (lettersInAlphabet.test(userGuess)) {
+        inputContentWrapper.classList.remove("input__content-wrapper--visible");
+        conditionsWrapperEl.classList.add("condition--visible");
+        compareGuessToAnswer();
+    } else {
+        userInput.value = "";
+    }
 });
 
 for (let nextPageButton of nextPageButtons) {
