@@ -143,13 +143,47 @@ function showLoosingCondition() {
     conditionMessageEl.innerText = `The correct answer is ${randomAnimal}!`;
 }
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
+
 function checkIfCorrectGuess() {
-    if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
-        showWinningCondition();
-    } else {
-        showLoosingCondition();
+    let cardInfo = document.querySelector(".submit-error");
+    let empty = userInput.value === '';
+    let numberEl = !isNaN(userInput.value);
+
+    function styleAnswerGuesses(){
+        form.classList.add("form--visable");
+        //state style changes
+        playAgainBtn.style.display = 'none';
+        cardInfo.style.display = 'block';
     }
-    displayGalleryImages();
+
+    if(empty) {
+        styleAnswerGuesses()
+        cardInfo.innerHTML = "Please fill in the field";
+        return;
+    }
+
+    if (numberEl) {
+        styleAnswerGuesses()
+        conditionsWrapperEl.classList.add("condition--visable"); 
+        cardInfo.textContent = "Input needs to be text";
+        return;
+    }
+    
+    if (!empty && !numberEl){
+        form.classList.remove("form--visable");
+        conditionsWrapperEl.classList.add("condition--visable");
+        playAgainBtn.style.display = 'block';
+        if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
+            showWinningCondition();
+            form.reset();
+        }
+        else {
+            showLoosingCondition();
+            form.reset();
+        }
+        
+    }
+    
 }
 
 // Play again button that reloads the page

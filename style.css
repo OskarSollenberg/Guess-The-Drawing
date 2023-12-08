@@ -58,6 +58,15 @@ body {
     text-align: center;
 }
 
+.submit-error{
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: -1rem;
+    color: var(--red);
+}
+
 .button {
     padding: 0.5rem 2rem;
     font-size: 2rem;
