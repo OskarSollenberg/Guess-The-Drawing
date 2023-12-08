@@ -30,7 +30,7 @@ body {
     background-color: white;
     padding: 1rem;
 }
-.title {
+.main__title {
     font-size: 3rem;
 }
 .card {
