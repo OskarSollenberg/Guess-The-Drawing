@@ -22,7 +22,7 @@ let secondsLeftToDraw = 3; // How many seconds the player should have to draw on
 let currentPageNumber = 0; // What card/page the user is currently on
 let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
 
-let imgUrls = []; // Array containing all the image-URL's saved to local storage
+let galleryItemList = []; // Array containing all the image-URL's saved to local storage
 
 function assignAnimal(animal) {
     randomAnimal = animal;
@@ -82,21 +82,21 @@ function changePage() {
     updateContentBasedOnPageNumber();
 }
 
-//This function saves the canvas-URL to an array called "imgUrls" in the local storage
+//This function saves the canvas-URL to an array called "galleryItemList" in the local storage
 function saveCanvasToLocalStorage() {
-    let object = {
+    let objectInfo = {
         url: "",
         animal: "",
     };
     let currentCanvasUrl = canvas.getImageUrl();
 
-    object.url = currentCanvasUrl;
-    object.animal = randomAnimal;
-    imgUrls.push(object);
+    objectInfo.url = currentCanvasUrl;
+    objectInfo.animal = randomAnimal;
+    galleryItemList.push(objectInfo);
 
-    // imgUrls.push(currentCanvasUrl);
+    // galleryItemList.push(currentCanvasUrl);
 
-    localStorage.setItem("imgUrls", JSON.stringify(imgUrls));
+    localStorage.setItem("galleryItemList", JSON.stringify(galleryItemList));
 }
 
 // This function removes all the images in the image-gallery and then creates new image-elements for every image-Url we have stored in local storage.
@@ -105,45 +105,46 @@ function displayGalleryImages() {
 
     galleryWrapper.innerHTML = "";
 
-    for (let imgUrl of imgUrls) {
-        let img = document.createElement("img");
-        let text = document.createElement("p");
+    for (let galleryItem of galleryItemList) {
+        let galleryImg = document.createElement("img");
+        let galleryText = document.createElement("p");
         let galleryContentWrapper = document.createElement("div");
         galleryContentWrapper.classList.add("gallery-content-wrapper");
 
-        img.src = imgUrl.url;
-        text.textContent = imgUrl.animal;
+        galleryImg.src = galleryItem.url;
+        galleryText.textContent = galleryItem.animal;
         galleryWrapper.appendChild(galleryContentWrapper);
 
-        galleryContentWrapper.appendChild(img);
-        galleryContentWrapper.appendChild(text);
+        galleryContentWrapper.appendChild(galleryImg);
+        galleryContentWrapper.appendChild(galleryText);
     }
 }
 
 // This function checkes if there are any previously drawn images that should be displayed in the image-gallery
 function checkForPrevSavedCanvasImages() {
-    if (localStorage.getItem("imgUrls")) {
-        imgUrls = JSON.parse(localStorage.getItem("imgUrls"));
+    if (localStorage.getItem("galleryItemList")) {
+        galleryItemList = JSON.parse(localStorage.getItem("galleryItemList"));
     }
 }
 // This is the winning condition
 function showWinningCondition() {
     conditionStatusEl.innerText = "Correct!";
     conditionMessageEl.innerText = "You are the best!";
+    displayGalleryImages();
 }
 // This is the loosing condition
-function showLoosingCondition() {
+function showLosingCondition() {
     conditionStatusEl.innerText = "Wrong!";
     conditionMessageEl.innerText = `The correct answer is ${randomAnimal}!`;
+    displayGalleryImages();
 }
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
-function checkIfCorrectGuess() {
+function compareGuessToAnswer() {
     if (userInput.value.toLowerCase() === randomAnimal.toLowerCase()) {
         showWinningCondition();
     } else {
-        showLoosingCondition();
+        showLosingCondition();
     }
-    displayGalleryImages();
 }
 
 // Play again button that reloads the page
@@ -155,13 +156,13 @@ playAgainBtn.addEventListener("click", function () {
 submitGuessBtn.addEventListener("click", function () {
     inputContentWrapper.classList.remove("input__content-wrapper--visible");
     conditionsWrapperEl.classList.add("condition--visible");
-    checkIfCorrectGuess();
-    inputContentWrapper.reset(); // Do we need this??
+    compareGuessToAnswer();
 });
 
 for (let nextPageButton of nextPageButtons) {
     nextPageButton.addEventListener("click", changePage);
 }
 
+// Initial redering
 checkForPrevSavedCanvasImages();
 displayGalleryImages();
