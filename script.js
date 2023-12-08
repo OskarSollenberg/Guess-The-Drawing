@@ -3,18 +3,18 @@ import * as canvas from "./canvas.js";
 
 // Cards / Forms / Inputs
 const cards = document.querySelectorAll(".card"); // All cards/pages saved in an array
-const form = document.querySelector("#form"); // The form that displays where the user can input guess
-const formGridRow = document.querySelector(".form__grid__row");
-const userInput = document.querySelector("#userInput"); // To store the user guess/input into a variable
+const inputContentWrapper = document.querySelector(".input__content-wrapper"); // The form that displays where the user can input guess
+// const formGridRow = document.querySelector(".card__grid-wrapper");
+const userInput = document.querySelector(".input"); // To store the user guess/input into a variable
 
 // Buttons
-const nextPageButtons = document.querySelectorAll(".button"); // All buttons that take you to the next card/page
-const submitGuessBtn = document.querySelector("#submitGuessBtn"); // The button to submit guess
-const playAgainBtn = document.querySelector(".play-again__btn");
+const nextPageButtons = document.querySelectorAll(".btn__next-page"); // All buttons that take you to the next card/page
+const submitGuessBtn = document.querySelector(".btn__submit-guess"); // The button to submit guess
+const playAgainBtn = document.querySelector(".btn__play-again");
 
 // Winning / Loosing conditions
-const conditionsWrapperEl = document.querySelector(".conditions__wrapper");
-const conditionTitleEl = document.querySelector(".condition__title");
+const conditionsWrapperEl = document.querySelector(".condition__wrapper");
+const conditionStatusEl = document.querySelector(".condition__status");
 const conditionMessageEl = document.querySelector(".condition__message");
 
 let randomAnimal; // Varible to store the API's random animal
@@ -24,40 +24,34 @@ let nextPageNumber = currentPageNumber + 1; // The page number to be displayed n
 
 let imgUrls = []; // Array containing all the image-URL's saved to local storage
 
-// let winningCondition;
-// let loosingCondition;
-
-function removeLoader() {
-    let loader = document.querySelector(".loader");
-    loader.classList.remove("loader--visable");
-}
-function displayAnimal() {
-    let animalWordEl = document.querySelector("#key-word");
-    animalWordEl.textContent = randomAnimal;
+function assignAnimal(animal) {
+    randomAnimal = animal;
 }
 // This function waits for the API to fetch a random animal and then when function is called, displays the animal in text in the HTML.
 async function loadAnimal() {
-    randomAnimal = await fetchRandomAnimal();
-    displayAnimal();
-    removeLoader();
+    const animalWordEl = document.querySelector("#random-animal");
+    const loader = document.querySelector(".loader");
+    const animal = await fetchRandomAnimal();
+    assignAnimal(animal);
+    animalWordEl.textContent = randomAnimal;
+    loader.classList.remove("loader--visible");
 }
-function showForm() {
-    form.classList.add("form--visable"); // Show form where user can input guess
-}
-function positionCardElements() {
+
+function handleTimeUp() {
+    canvas.disableDrawing();
+    saveCanvasToLocalStorage();
+    inputContentWrapper.classList.add("input__content-wrapper--visible"); // Show form where user can input guess
     cards[currentPageNumber].classList.add("card--content-positioning"); // Push canvas to the side to make place for form (grid on class in css)
 }
 // This function checks if the user have any time left to draw and eccecutes accordingly
 function checkTimeLeftToDraw() {
     if (secondsLeftToDraw === 0) {
-        canvas.disableDrawing();
-        saveCanvasToLocalStorage();
-        showForm();
-        positionCardElements();
+        handleTimeUp();
     } else {
         setTimeout(countDownSeconds, 1000); // Keep counting down by calling the function again after 1 second
     }
 }
+
 function displaySecondsLeftToDraw() {
     const counter = document.querySelector("#counter");
     counter.textContent = secondsLeftToDraw;
@@ -81,8 +75,8 @@ function updateContentBasedOnPageNumber() {
 
 // This function displays the next card/page and increments the current page number
 function changePage() {
-    cards[currentPageNumber].classList.remove("card--visable");
-    cards[nextPageNumber].classList.add("card--visable");
+    cards[currentPageNumber].classList.remove("card--visible");
+    cards[nextPageNumber].classList.add("card--visible");
     currentPageNumber++;
     nextPageNumber++;
     updateContentBasedOnPageNumber();
@@ -134,12 +128,12 @@ function checkForPrevSavedCanvasImages() {
 }
 // This is the winning condition
 function showWinningCondition() {
-    conditionTitleEl.innerText = "Correct!";
+    conditionStatusEl.innerText = "Correct!";
     conditionMessageEl.innerText = "You are the best!";
 }
 // This is the loosing condition
 function showLoosingCondition() {
-    conditionTitleEl.innerText = "Wrong!";
+    conditionStatusEl.innerText = "Wrong!";
     conditionMessageEl.innerText = `The correct answer is ${randomAnimal}!`;
 }
 // This function checkes if the user have guessed the correct animal and calls for function to display winning or loosing condition
@@ -159,10 +153,10 @@ playAgainBtn.addEventListener("click", function () {
 
 // Submit button for user to submit their guess
 submitGuessBtn.addEventListener("click", function () {
-    form.classList.remove("form--visable");
-    conditionsWrapperEl.classList.add("condition--visable");
+    inputContentWrapper.classList.remove("input__content-wrapper--visible");
+    conditionsWrapperEl.classList.add("condition--visible");
     checkIfCorrectGuess();
-    form.reset(); // Do we need this??
+    inputContentWrapper.reset(); // Do we need this??
 });
 
 for (let nextPageButton of nextPageButtons) {
