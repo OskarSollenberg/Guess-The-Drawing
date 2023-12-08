@@ -33,7 +33,7 @@ body {
 .main__title {
     font-size: 3rem;
 }
-.card {
+.page {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -45,17 +45,17 @@ body {
     background-color: var(--mustardYellow);
 }
 @media (max-width: 60rem) {
-    .card {
+    .page {
         border-radius: 0rem;
         max-width: 50rem;
         width: 90vw;
     }
 }
-.card-information {
+.page-information {
     text-align: center;
     font-size: 1.2rem;
 }
-.card-information--lg {
+.page-information--lg {
     font-size: 2rem;
 }
 
@@ -98,7 +98,7 @@ body {
     width: 250px;
     height: 150px;
 }
-.card--visible {
+.page--visible {
     display: flex;
 }
 
@@ -107,7 +107,7 @@ body {
     background: white;
 }
 
-.card--content-positioning {
+.page--content-positioning {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -115,7 +115,7 @@ body {
 }
 
 @media (max-width: 60rem) {
-    .card--content-positioning {
+    .page--content-positioning {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -123,7 +123,7 @@ body {
     }
 }
 
-.card__grid-wrapper {
+.page__grid-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;

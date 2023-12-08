@@ -10,3 +10,10 @@ export async function fetchRandomAnimal() {
         return "Error fetching word";
     }
 }
+export async function loadAnimal() {
+    const animalWordEl = document.querySelector("#random-animal");
+    const loader = document.querySelector(".loader");
+    const animal = await fetchRandomAnimal();
+    animalWordEl.textContent = animal;
+    loader.classList.remove("loader--visible");
+}

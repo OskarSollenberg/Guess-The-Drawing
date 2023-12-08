@@ -17,53 +17,53 @@
         <div class="site-wrapper">
             <main class="main">
                 <h1 class="main__title">Guess The Drawing</h1>
-                <div class="card card--visible">
-                    <p class="card-information card-information--lg">
+
+                <div class="page" id="welcomePage">
+                    <p class="page-information page-information--lg">
                         Welcome to "Draw the Animal"
                     </p>
-                    <p class="card-information">
+                    <p class="page-information">
                         This game is about guessing what animal the other player
                         has drawn.
                     </p>
                     <button class="btn btn__next-page">Start</button>
                 </div>
 
-                <div class="card">
-                    <p class="card-information card-information--lg">
+                <div class="page" id="instructionsPage">
+                    <p class="page-information page-information--lg">
                         Player 2 look away
                     </p>
-                    <p class="card-information">
+                    <p class="page-information">
                         We will now give player 1 the Animal they should draw
                     </p>
-
                     <button class="btn btn__next-page">Next</button>
                 </div>
 
-                <div class="card">
+                <div class="page" id="animalPage">
                     <div class="loader loader--visible">
                         <img src="Assets/Images/dog-loader.gif" alt="" />
                     </div>
-                    <p class="card-information" id="random-animal"></p>
+                    <p class="page-information" id="random-animal"></p>
                     <button class="btn btn__next-page">Start Drawing</button>
                 </div>
 
-                <div class="card">
-                    <div class="card__grid-wrapper">
-                        <p class="card-information">Player 1, draw the img</p>
+                <div class="page" id="gamePage">
+                    <div class="page__grid-wrapper">
+                        <p class="page-information">Player 1, draw the img</p>
                         <canvas
                             class="canvas"
                             id="canvas"
                             width="400"
                             height="230"
                         ></canvas>
-                        <p id="counter">20</p>
+                        <p id="counter"></p>
                     </div>
-                    <div class="card__grid-wrapper">
+                    <div class="page__grid-wrapper">
                         <form
                             class="input__content-wrapper"
                             onsubmit="return false"
                         >
-                            <p class="card-information card-information">
+                            <p class="page-information page-information">
                                 Player 2, guess the animal
                             </p>
                             <input class="input" type="text" name="lname" />
@@ -75,9 +75,9 @@
                         </form>
                         <div class="condition__wrapper">
                             <p
-                                class="card-information card-information--lg condition__status"
+                                class="page-information page-information--lg condition__status"
                             ></p>
-                            <p class="card-information condition__message"></p>
+                            <p class="page-information condition__message"></p>
                             <button class="btn btn__play-again">
                                 Play Again
                             </button>
