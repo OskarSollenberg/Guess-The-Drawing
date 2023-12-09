@@ -1,8 +1,8 @@
-import * as api from "./api.js";
-import * as canvas from "./canvas.js";
-import * as timer from "./timer.js";
-import * as imgGallery from "./imgGallery.js";
-import * as answer from "./conditions.js";
+import * as api from "./components/api.js";
+import * as canvas from "./components/canvas.js";
+import * as timer from "./components/timer.js";
+import * as imgGallery from "./components/imgGallery.js";
+import * as answer from "./components/conditions.js";
 
 // Router function
 function setPage(pageId) {
