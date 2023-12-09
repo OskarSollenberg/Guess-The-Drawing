@@ -1,4 +1,5 @@
 // This function fetches a random animal name from the API
+
 export async function fetchRandomAnimal() {
     const url = "https://animal-name-api.onrender.com/random-animal";
     try {
