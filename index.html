@@ -48,22 +48,25 @@
                 </div>
 
                 <div class="page" id="gamePage">
-                    <div class="page__grid-wrapper">
-                        <p class="page-information">Player 1, draw the img</p>
-                        <canvas
-                            class="canvas"
-                            id="canvas"
-                            width="400"
-                            height="230"
-                        ></canvas>
-                        <p id="counter"></p>
+                    <p class="page-information">Player 1, draw the img</p>
+                    <canvas
+                        class="canvas"
+                        id="canvas"
+                        width="400"
+                        height="230"
+                    ></canvas>
+                    <p id="counter"></p>
+                </div>
+
+                <div class="page" id="inputPage">
+                    <div class="col">
+                        <p class="page-information">What a nice drawing</p>
+                        <img class="canvas-img" id="userGuesscanvas" src="#" />
                     </div>
-                    <div class="page__grid-wrapper">
-                        <form
-                            class="input__content-wrapper"
-                            onsubmit="return false"
-                        >
-                            <p class="page-information page-information">
+
+                    <div class="col">
+                        <form class="input__content" onsubmit="return false">
+                            <p class="page-information">
                                 Player 2, guess the animal
                             </p>
                             <input class="input" type="text" name="lname" />
@@ -73,9 +76,10 @@
                                 value="Submit"
                             />
                         </form>
-                        <div class="condition__wrapper">
+
+                        <div class="conditions">
                             <p
-                                class="page-information page-information--lg condition__status"
+                                class="page-information--lg condition__status"
                             ></p>
                             <p class="page-information condition__message"></p>
                             <button class="btn btn__play-again">

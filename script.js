@@ -25,19 +25,16 @@ function setPage(pageId) {
 // Render component function
 function renderWelcomePage() {
     let welcomePage = document.querySelector("#welcomePage");
-    displayPage(welcomePage);
+    welcomePage.classList.add("page--visible");
 
     let nextBtnEl = welcomePage.querySelector(".btn__next-page");
     nextBtnEl.addEventListener("click", function () {
         setPage("instructionsPage");
     });
 }
-function renderImgGallery() {
-    imgGallery.initImgGallery();
-}
 function renderInstructionsPage() {
     let instructionsPage = document.querySelector("#instructionsPage");
-    displayPage(instructionsPage);
+    instructionsPage.classList.add("page--visible");
 
     let nextBtnEl = instructionsPage.querySelector(".btn__next-page");
     nextBtnEl.addEventListener("click", function () {
@@ -46,7 +43,7 @@ function renderInstructionsPage() {
 }
 function renderRandAnimalPage() {
     let animalPage = document.querySelector("#animalPage");
-    displayPage(animalPage);
+    animalPage.classList.add("page--visible");
     api.loadAnimal();
 
     let nextBtnEl = animalPage.querySelector(".btn__next-page");
@@ -56,25 +53,22 @@ function renderRandAnimalPage() {
 }
 function renderGamePage() {
     let gamePage = document.querySelector("#gamePage");
-    displayPage(gamePage);
+    gamePage.classList.add("page--visible");
 
     canvas.initCanvas();
 
     timer.initTimer(handleTimerEnd);
     function handleTimerEnd() {
-        canvas.disableDrawing();
         imgGallery.saveCanvasToLocalStorage();
         setPage("inputPage");
     }
 }
 function renderInputPage() {
-    const inputContentWrapper = document.querySelector(
-        ".input__content-wrapper"
-    );
-    inputContentWrapper.classList.toggle("input__content-wrapper--visible");
+    let inputPage = document.querySelector("#inputPage");
+    inputPage.classList.add("page--visible");
 
-    imgGallery.displayCurrentCanvas();
-    gamePage.classList.add("page--content-positioning");
+    imgGallery.displayCanvasImg();
+    inputPage.classList.add("page--content-positioning");
 
     const submitGuessBtn = document.querySelector(".btn__submit-guess");
     submitGuessBtn.addEventListener("click", function () {
@@ -83,13 +77,11 @@ function renderInputPage() {
         const lettersInAlphabet = /^[a-z]+$/;
 
         if (lettersInAlphabet.test(userGuess)) {
-            const conditionsWrapperEl = document.querySelector(
-                ".condition__wrapper"
-            );
-            conditionsWrapperEl.classList.add("condition--visible");
-            inputContentWrapper.classList.toggle(
-                "input__content-wrapper--visible"
-            );
+            const inputContent = document.querySelector(".input__content");
+            const conditionsEl = document.querySelector(".conditions");
+
+            inputContent.classList.add("input__content--hidden");
+            conditionsEl.classList.add("condition--visible");
 
             answer.initAnswer();
             imgGallery.initImgGallery();
@@ -99,14 +91,10 @@ function renderInputPage() {
     });
 }
 
-function displayPage(pageId) {
-    pageId.classList.add("page--visible");
-}
-
 const playAgainBtn = document.querySelector(".btn__play-again");
 playAgainBtn.addEventListener("click", function () {
     location.reload();
 });
 
 renderWelcomePage();
-renderImgGallery();
+imgGallery.initImgGallery();

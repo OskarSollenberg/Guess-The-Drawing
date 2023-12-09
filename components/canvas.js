@@ -1,5 +1,4 @@
 let isDrawing = false;
-let canDraw = true;
 let lastXPos = 0;
 let lastYPos = 0;
 
@@ -7,10 +6,6 @@ let lastYPos = 0;
 const canvasEl = document.querySelector("#canvas"); // Canvas element
 const context = canvasEl.getContext("2d"); // The content within the canvas
 const rect = canvasEl.getBoundingClientRect(); // Size of the Canvas
-
-export function disableDrawing() {
-    canDraw = false;
-}
 
 export function getImageUrl() {
     return canvasEl.toDataURL("image/png");
@@ -34,7 +29,7 @@ export function initCanvas() {
         context.moveTo(lastXPos, lastYPos);
     });
     canvasEl.addEventListener("pointermove", function (e) {
-        if (canDraw && isDrawing) {
+        if (isDrawing) {
             const x = ((e.offsetX * canvasEl.width) / canvasEl.clientWidth) | 0;
             const y =
                 ((e.offsetY * canvasEl.height) / canvasEl.clientHeight) | 0;

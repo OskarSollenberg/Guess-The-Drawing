@@ -44,10 +44,9 @@ export function initImgGallery() {
     renderImgGallery();
 }
 
-export function displayCurrentCanvas() {
-    let canvasEl = document.querySelector("#canvas");
+export function displayCanvasImg() {
+    let userGuesscanvas = document.querySelector("#userGuesscanvas");
     galleryItemList = JSON.parse(localStorage.getItem("galleryItemList"));
-    let currentCanvas = galleryItemList[galleryItemList.length - 1].url;
-    canvasEl.innerHTML = currentCanvas;
-    console.log(galleryItemList);
+    let currentCanvasUrl = galleryItemList[galleryItemList.length - 1].url;
+    userGuesscanvas.src = currentCanvasUrl;
 }
