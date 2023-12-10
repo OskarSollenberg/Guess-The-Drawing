@@ -59,12 +59,12 @@
                 </div>
 
                 <div class="page" id="inputPage">
-                    <div class="col">
+                    <div class="input__grid-row">
                         <p class="page-information">What a nice drawing</p>
                         <img class="canvas-img" id="userGuesscanvas" src="#" />
                     </div>
 
-                    <div class="col">
+                    <div class="input__grid-row">
                         <form class="input__content" onsubmit="return false">
                             <p class="page-information">
                                 Player 2, guess the animal
@@ -76,8 +76,7 @@
                                 value="Submit"
                             />
                         </form>
-
-                        <div class="conditions">
+                        <div class="input__grid-row conditions">
                             <p
                                 class="page-information--lg condition__status"
                             ></p>
@@ -90,10 +89,8 @@
                 </div>
             </main>
             <section class="section-gallery">
-                <gallery class="gallery" id="gallery">
-                    <h2 class="section__title">Gallery</h2>
-                    <div class="gallery-wrapper"></div>
-                </gallery>
+                <h2 class="section__title">Gallery</h2>
+                <div class="gallery-grid-wrapper"></div>
             </section>
         </div>
         <script src="script.js" type="module"></script>

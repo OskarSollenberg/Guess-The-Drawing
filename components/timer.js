@@ -1,6 +1,6 @@
 export function initTimer(callback) {
     const counter = document.querySelector("#counter");
-    let secondsLeftToDraw = 4;
+    let secondsLeftToDraw = 2;
     counter.textContent = secondsLeftToDraw;
 
     function startTimer() {

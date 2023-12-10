@@ -25,14 +25,14 @@ export function initImgGallery() {
         }
     }
     function renderImgGallery() {
-        const galleryWrapper = document.querySelector(".gallery-wrapper");
+        const galleryWrapper = document.querySelector(".gallery-grid-wrapper");
         galleryWrapper.innerHTML = "";
 
         for (let galleryItem of galleryItemList) {
             let galleryImg = document.createElement("img");
             let galleryText = document.createElement("p");
             let galleryContentWrapper = document.createElement("div");
-            galleryContentWrapper.classList.add("gallery-content-wrapper");
+            galleryContentWrapper.classList.add("gallery-grid-items");
             galleryImg.src = galleryItem.url;
             galleryText.textContent = galleryItem.animal;
             galleryWrapper.appendChild(galleryContentWrapper);
