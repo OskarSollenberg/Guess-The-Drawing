@@ -91,8 +91,17 @@ body {
 }
 
 .section-gallery {
-    width: 100vw;
+    width: 90vw;
+    border-radius: 2rem;
     background-color: var(--mustardYellow);
+}
+
+@media (max-width: 60rem) {
+    .section-gallery {
+        width: 90vw;
+
+        border-radius: 0rem;
+    }
 }
 
 .gallery {
