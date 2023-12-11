@@ -24,7 +24,7 @@ const conditionMessageEl = document.querySelector(".condition__message");
 const lettersInAlphabet = /^[a-z]+$/;
 
 let randomAnimal; // Varible to store the API's random animal
-let secondsLeftToDraw = 3; // How many seconds the player should have to draw on the canvas
+let secondsLeftToDraw = 30; // How many seconds the player should have to draw on the canvas
 let currentPageNumber = 0; // What card/page the user is currently on
 let nextPageNumber = currentPageNumber + 1; // The page number to be displayed next
 
