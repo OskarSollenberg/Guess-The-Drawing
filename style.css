@@ -12,6 +12,7 @@
 
 body {
     font-family: "Delicious Handrawn", cursive;
+    background-color: #eeead7;
 }
 
 .site-wrapper {
@@ -27,8 +28,8 @@ body {
     align-items: center;
     text-align: left;
     justify-content: center;
-    background-color: white;
     padding: 1rem;
+    background-color: #eeead7;
 }
 .main__title {
     font-size: 3rem;
@@ -43,6 +44,8 @@ body {
     border-radius: 2rem;
     padding: 2rem;
     background-color: var(--mustardYellow);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 @media (max-width: 60rem) {
     .card {
