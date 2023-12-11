@@ -44,8 +44,6 @@ async function loadAnimal() {
 }
 
 function handleTimeUp() {
-  //When users finish drawing, we want to enable scrolling
-  document.querySelector("body").style.overflow = "visible";
   canvas.disableDrawing();
   saveCanvasToLocalStorage();
   cardInformationCanvas.textContent = "Nice drawing!!";
@@ -79,9 +77,6 @@ function updateContentBasedOnPageNumber() {
   } else if (currentPageNumber === 3) {
     canvas.initCanvas();
     countDownSeconds();
-    window.scrollTo(0, 0); //scroll to top
-    //When users are drawing,disable scrolling
-    document.querySelector("body").style.overflow = "hidden";
   }
 }
 
@@ -180,8 +175,41 @@ for (let nextPageButton of nextPageButtons) {
   nextPageButton.addEventListener("click", changePage);
 }
 
+// Initialize touch event handlers
+function initTouchHandlers() {
+  const canvasEl = document.getElementById("canvas");
+
+  function handleTouchStart(e) {
+    e.preventDefault();
+    canvas.startDrawing(getTouchPos(canvasEl, e));
+  }
+
+  function handleTouchMove(e) {
+    e.preventDefault();
+    if (canvas.isDrawing()) {
+      canvas.continueDrawing(getTouchPos(canvasEl, e));
+    }
+  }
+
+  function handleTouchEnd(e) {
+    e.preventDefault();
+    canvas.stopDrawing();
+  }
+
+  function getTouchPos(canvasEl, touchEvent) {
+    const rect = canvasEl.getBoundingClientRect();
+    const touch = touchEvent.touches[0];
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    };
+  }
+  canvasEl.addEventListener("touchstart", handleTouchStart, false);
+  canvasEl.addEventListener("touchmove", handleTouchMove, false);
+  canvasEl.addEventListener("touchend", handleTouchEnd, false);
+}
+
 // Initial redering
 checkForPrevSavedCanvasImages();
 displayGalleryImages();
-
-//line 48 83
+initTouchHandlers();
