@@ -12,14 +12,15 @@
     --whiteCream: #eeead7;
 
     /*Fonts*/
-    --CursiveMain: 'Patrick Hand SC', cursive;
-    --Cursive:"Delicious Handrawn", cursive;
-    --Roboto:'Roboto Flex', sans-serif;
+    --CursiveMain: "Patrick Hand SC", cursive;
+    --Cursive: "Delicious Handrawn", cursive;
+    --Roboto: "Roboto Flex", sans-serif;
 }
 
 body {
     font-family: var(--CursiveMain);
-    background-color: var(--whiteCream);
+    background-image: url(Assets/Images/bg-pancils.jpg);
+    color: rgb(84, 42, 42);
 }
 
 .site-wrapper {
@@ -35,11 +36,10 @@ body {
     align-items: center;
     text-align: left;
     justify-content: center;
-    background-color: #eeead7;
 }
 .main__title {
     font-family: var(--Cursive);
-    font-size: 3rem;
+    font-size: 4rem;
 }
 .card {
     display: none;
@@ -64,13 +64,13 @@ body {
 }
 .card-information {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 .card-information--lg {
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
-.btn{
+.btn {
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
     border: 3px solid var(--green);
@@ -85,7 +85,7 @@ body {
     transition: ease-out 0.6s;
 }
 
-.btn:hover{
+.btn:hover {
     box-shadow: inset 400px 0 0 0 var(--green);
     color: var(--whiteCream);
 }
@@ -102,7 +102,6 @@ body {
     justify-content: center;
     text-align: center;
     padding: 1rem;
-    
 }
 
 .gallery-wrapper {
@@ -117,16 +116,38 @@ body {
     min-height: 31.25rem;
     border-radius: 2rem;
 }
+@media (max-width: 60rem) {
+    .gallery-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 40rem) {
+    .gallery-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
 
-.section__title{
+.random-animal {
+    font-size: 3.5rem;
+}
+
+.section__title {
     font-size: 3rem;
 }
 
 .gallery img {
     background: white;
-    border: 0.5rem inset var(--goldYellow);
+    border: 0.5rem rgb(84, 42, 42);
     width: 16rem;
     height: 9.5rem;
+    max-width: 200px;
+    border-style: solid;
+    border-width: 10px;
+    border-top-color: lighten(#000, 20%);
+    border-right-color: lighten(#000, 0%);
+    border-bottom-color: lighten(#000, 20%);
+    border-left-color: lighten(#000, 0%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 .card--visible {
     display: flex;
@@ -135,7 +156,7 @@ body {
 .canvas {
     border-radius: 0.1rem;
     background: white;
-    width: 17rem;
+    width: 100%;
 }
 
 .card--content-positioning {
@@ -199,15 +220,28 @@ body {
     align-items: center;
 }
 
-.footer{
-    height: 5rem;
+.footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    background: white;
 }
 
-.footer ul{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
+.footer__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+}
+.footer__list li {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.footer img {
+    width: 1rem;
 }

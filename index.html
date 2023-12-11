@@ -12,31 +12,35 @@
             href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap"
             rel="stylesheet"
         />
-        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
-        <link 
-            href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,800&display=swap" 
+        <link
+            href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap"
             rel="stylesheet"
         />
-        <title>Guess The Drawing</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,800&display=swap"
+            rel="stylesheet"
+        />
+        <title>WildGuess</title>
     </head>
     <body>
         <div class="site-wrapper">
             <main class="main">
-                <h1 class="main__title">Guess The Drawing</h1>
+                <h1 class="main__title">PencilPaws</h1>
                 <div class="card card--visible">
                     <p class="card-information card-information--lg">
-                        Welcome to "Draw the Animal"
+                        Welcome to
                     </p>
                     <p class="card-information">
-                        This game is about guessing what animal the other player
-                        has drawn.
+                        "PencilPaws", The game where one player sketches an
+                        animal, and the other player tries to guess which animal
+                        it is!
                     </p>
                     <button class="btn btn__next-page">Start</button>
                 </div>
 
                 <div class="card">
                     <p class="card-information card-information--lg">
-                        Player 2 look away
+                        Player 2 look away!!!
                     </p>
                     <p class="card-information">
                         We will now give player 1 the Animal they should draw
@@ -49,13 +53,21 @@
                     <div class="loader loader--visible">
                         <img src="Assets/Images/dog-loader.gif" alt="" />
                     </div>
-                    <p class="card-information" id="random-animal"></p>
+                    <p
+                        class="card-information random-animal"
+                        id="random-animal"
+                    ></p>
                     <button class="btn btn__next-page">Start Drawing</button>
                 </div>
 
                 <div class="card">
                     <div class="card__grid-wrapper">
-                        <p class="card-information">Player 1, draw the img</p>
+                        <p
+                            class="card-information"
+                            id="card-infromation-canvas"
+                        >
+                            Player 1, draw the img
+                        </p>
                         <canvas
                             class="canvas"
                             id="canvas"
@@ -92,47 +104,49 @@
                 </div>
             </main>
             <section class="section-gallery">
-                <gallery class="gallery" id="gallery">
+                <div class="gallery" id="gallery">
                     <h2 class="section__title">Gallery</h2>
                     <div class="gallery-wrapper"></div>
-                </gallery>
+                </div>
             </section>
             <footer class="footer">
-                <ul>
+                <ul class="footer__list">
                     <li>
-                        <p>Jess</p>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/github.svg" alt="">   
+                        <p>Oskar</p>
+                        <a href="https://github.com/OskarSollenberg">
+                            <img src="./Assets/icons/github.svg" alt="" />
                         </a>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/linkedin.svg" alt="">   
+                        <a
+                            href="https://www.linkedin.com/in/oskar-sollenberg-12ab0b24b/"
+                        >
+                            <img src="./Assets/icons/linkedin.svg" alt="" />
                         </a>
                     </li>
                     <li>
                         <p>Jess</p>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/github.svg" alt="">   
+                        <a href="https://github.com/jesslee2023">
+                            <img src="./Assets/icons/github.svg" alt="" />
                         </a>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/linkedin.svg" alt="">   
-                        </a>
-                    </li>
-                    <li>
-                        <p>Jess</p>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/github.svg" alt="">   
-                        </a>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/linkedin.svg" alt="">   
+                        <a href="https://www.linkedin.com/in/jingping-li/ ">
+                            <img src="./Assets/icons/linkedin.svg" alt="" />
                         </a>
                     </li>
                     <li>
-                        <p>Jess</p>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/github.svg" alt="">   
+                        <p>Petra</p>
+                        <a href="https://github.com/PoppyRed91">
+                            <img src="./Assets/icons/github.svg" alt="" />
                         </a>
-                        <a href="#" target="_blank">
-                            <img src="./Assets/icons/linkedin.svg" alt="">   
+                        <a href="https://www.linkedin.com/in/petra-cuturdic">
+                            <img src="./Assets/icons/linkedin.svg" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <p>Ingrid</p>
+                        <a href="https://github.com/IngridAkeida">
+                            <img src="./Assets/icons/github.svg" alt="" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/ingrid-sanches">
+                            <img src="./Assets/icons/linkedin.svg" alt="" />
                         </a>
                     </li>
                 </ul>

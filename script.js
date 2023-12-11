@@ -6,6 +6,9 @@ const cards = document.querySelectorAll(".card"); // All cards/pages saved in an
 const inputContentWrapper = document.querySelector(".input__content-wrapper"); // The form that displays where the user can input guess
 // const formGridRow = document.querySelector(".card__grid-wrapper");
 const userInput = document.querySelector(".input"); // To store the user guess/input into a variable
+const cardInformationCanvas = document.querySelector(
+    "#card-infromation-canvas"
+);
 
 // Buttons
 const nextPageButtons = document.querySelectorAll(".btn__next-page"); // All buttons that take you to the next card/page
@@ -43,6 +46,7 @@ async function loadAnimal() {
 function handleTimeUp() {
     canvas.disableDrawing();
     saveCanvasToLocalStorage();
+    cardInformationCanvas.textContent = "Nice drawing!!";
     inputContentWrapper.classList.add("input__content-wrapper--visible"); // Show form where user can input guess
     cards[currentPageNumber].classList.add("card--content-positioning"); // Push canvas to the side to make place for form (grid on class in css)
 }
