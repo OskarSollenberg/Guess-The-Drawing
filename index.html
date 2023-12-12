@@ -1,157 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,800&display=swap"
-            rel="stylesheet"
-        />
-        <title>PencilPaws</title>
-    </head>
-    <body>
-        <div class="site-wrapper">
-            <main class="main">
-                <h1 class="main__title">PencilPaws</h1>
-                <div class="card card--visible">
-                    <p class="card-information card-information--lg">
-                        Welcome to
-                    </p>
-                    <p class="card-information">
-                        "PencilPaws", The game where one player sketches an
-                        animal, and the other player tries to guess which animal
-                        it is!
-                    </p>
-                    <button class="btn btn__next-page">Start</button>
-                </div>
-
-                <div class="card">
-                    <p class="card-information card-information--lg">
-                        Player 2 look away!!!
-                    </p>
-                    <p class="card-information">
-                        We will now give player 1 the Animal they should draw
-                    </p>
-
-                    <button class="btn btn__next-page">Next</button>
-                </div>
-
-                <div class="card">
-                    <div class="loader loader--visible">
-                        <img src="Assets/Images/dog-loader.gif" alt="" />
-                    </div>
-                    <p
-                        class="card-information random-animal"
-                        id="random-animal"
-                    ></p>
-                    <button class="btn btn__next-page">Start Drawing</button>
-                </div>
-
-                <div class="card">
-                    <div class="card__grid-wrapper">
-                        <p
-                            class="card-information"
-                            id="card-infromation-canvas"
-                        >
-                            Player 1, draw the img
-                        </p>
-                        <canvas
-                            class="canvas"
-                            id="canvas"
-                            width="400"
-                            height="230"
-                        ></canvas>
-                        <p id="counter">20</p>
-                    </div>
-                    <div class="card__grid-wrapper">
-                        <form
-                            class="input__content-wrapper"
-                            onsubmit="return false"
-                        >
-                            <p class="card-information card-information">
-                                Player 2, guess the animal
-                            </p>
-                            <input class="input" type="text" name="name" />
-                            <input
-                                class="btn btn__submit-guess"
-                                type="submit"
-                                value="Submit"
-                            />
-                        </form>
-                        <div class="condition__wrapper">
-                            <p
-                                class="card-information card-information--lg condition__status"
-                            ></p>
-                            <p class="card-information condition__message"></p>
-                            <button class="btn btn__play-again">
-                                Play Again
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <section class="section-gallery">
-                <div class="gallery" id="gallery">
-                    <h2 class="section__title">Gallery</h2>
-                    <div class="gallery-wrapper"></div>
-                </div>
-            </section>
-            <footer class="footer">
-                <ul class="footer__list">
-                    <li>
-                        <p>Oskar</p>
-                        <a href="https://github.com/OskarSollenberg">
-                            <img src="./Assets/icons/github.svg" alt="" />
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/oskar-sollenberg-12ab0b24b/"
-                        >
-                            <img src="./Assets/icons/linkedin.svg" alt="" />
-                        </a>
-                    </li>
-                    <li>
-                        <p>Jess</p>
-                        <a href="https://github.com/jesslee2023">
-                            <img src="./Assets/icons/github.svg" alt="" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/jingping-li/ ">
-                            <img src="./Assets/icons/linkedin.svg" alt="" />
-                        </a>
-                    </li>
-                    <li>
-                        <p>Petra</p>
-                        <a href="https://github.com/PoppyRed91">
-                            <img src="./Assets/icons/github.svg" alt="" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/petra-cuturdic">
-                            <img src="./Assets/icons/linkedin.svg" alt="" />
-                        </a>
-                    </li>
-                    <li>
-                        <p>Ingrid</p>
-                        <a href="https://github.com/IngridAkeida">
-                            <img src="./Assets/icons/github.svg" alt="" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/ingrid-sanches">
-                            <img src="./Assets/icons/linkedin.svg" alt="" />
-                        </a>
-                    </li>
-                </ul>
-            </footer>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500;8..144,800&display=swap"
+      rel="stylesheet"
+    />
+    <title>PencilPaws</title>
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <main class="main">
+        <h1 class="main__title">PencilPaws</h1>
+        <div class="card card--visible">
+          <p class="card-information card-information--lg">Welcome to</p>
+          <p class="card-information">
+            "PencilPaws", The game where one player sketches an animal, and the
+            other player tries to guess which animal it is!
+          </p>
+          <button class="btn btn__next-page">Start</button>
         </div>
-        <script src="script.js" type="module"></script>
-    </body>
+
+        <div class="card">
+          <p class="card-information card-information--lg">
+            Player 2 look away!!!
+          </p>
+          <p class="card-information">
+            We will now give player 1 the Animal they should draw
+          </p>
+
+          <button class="btn btn__next-page">Next</button>
+        </div>
+
+        <div class="card">
+          <div class="loader loader--visible">
+            <img src="Assets/Images/dog-loader.gif" alt="" />
+          </div>
+          <p class="card-information random-animal" id="random-animal"></p>
+          <button class="btn btn__next-page">Start Drawing</button>
+        </div>
+
+        <div class="card">
+          <div class="card__grid-wrapper">
+            <p class="card-information" id="card-infromation-canvas">
+              Player 1, draw the img
+            </p>
+            <canvas
+              class="canvas"
+              id="canvas"
+              width="400"
+              height="230"
+            ></canvas>
+            <p id="counter">20</p>
+          </div>
+          <div class="card__grid-wrapper">
+            <form class="input__content-wrapper" onsubmit="return false">
+              <p class="card-information card-information">
+                Player 2, guess the animal
+              </p>
+              <input class="input" type="text" name="name" />
+              <input
+                class="btn btn__submit-guess"
+                type="submit"
+                value="Submit"
+              />
+            </form>
+            <div class="condition__wrapper">
+              <p
+                class="card-information card-information--lg condition__status"
+              ></p>
+              <p class="card-information condition__message"></p>
+              <button class="btn btn__play-again">Play Again</button>
+            </div>
+          </div>
+        </div>
+      </main>
+      <section class="section-gallery">
+        <div class="gallery" id="gallery">
+          <h2 class="section__title">Gallery</h2>
+          <div class="gallery-wrapper"></div>
+        </div>
+      </section>
+      <footer class="footer">
+        <ul class="footer__list">
+          <li>
+            <p>Oskar</p>
+            <a href="https://github.com/OskarSollenberg">
+              <img src="./Assets/icons/github.svg" alt="" />
+            </a>
+            <a href="https://www.linkedin.com/in/oskar-sollenberg-12ab0b24b/">
+              <img src="./Assets/icons/linkedin.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <p>Jess</p>
+            <a href="https://github.com/jesslee2023">
+              <img src="./Assets/icons/github.svg" alt="" />
+            </a>
+            <a href="https://www.linkedin.com/in/jingping-li/ ">
+              <img src="./Assets/icons/linkedin.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <p>Petra</p>
+            <a href="https://github.com/PoppyRed91">
+              <img src="./Assets/icons/github.svg" alt="" />
+            </a>
+            <a href="https://www.linkedin.com/in/petra-cuturdic">
+              <img src="./Assets/icons/linkedin.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <p>Ingrid</p>
+            <a href="https://github.com/IngridAkeida">
+              <img src="./Assets/icons/github.svg" alt="" />
+            </a>
+            <a href="https://www.linkedin.com/in/ingrid-sanches">
+              <img src="./Assets/icons/linkedin.svg" alt="" />
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+    <audio id="drawingSound" src="/audio/drawing.mp3"></audio>;
+    <audio id="clickSound" src="/audio/mouse-click.mp3"></audio>
+    <script src="script.js" type="module"></script>
+  </body>
 </html>
